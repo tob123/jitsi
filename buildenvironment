@@ -1,0 +1,10 @@
+export CONTAINER_1=s6-base
+export CONTAINER_2=jitsi-prosody
+export CONTAINER_3=jitsi-jvb
+export CONTAINER_4=jitsi-jicofo
+export CONTAINER_5=jitsi-web
+export CONTAINER_6=jitsi-turn
+export CACHE_REPO=${BUILD_REGISTRY}
+for i in AUTHORIZED_USER_PASS_RANDOM JICOFO_SECRET_RANDOM JICOFO_AUTH_PASSWORD_RANDOM JVB_AUTH_PASSWORD_RANDOM TURN_PASSWORD_RANDOM; do
+  export ${i}=`openssl rand -base64 32`
+done

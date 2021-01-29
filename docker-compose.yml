@@ -1,0 +1,78 @@
+version: '3'
+services:
+# XMPP server
+  jitsi-prosody:
+    image: ${BUILD_REGISTRY}/${PROJECT}/${CONTAINER_2}:${JITSI_VERSION}
+    build: 
+      context: ./prosody
+      args: 
+        JITSI_VERSION: ${JITSI_VERSION}
+        REGISTRY: ${REGISTRY}
+        PROJECT: ${PROJECT}
+        BUILD_REGISTRY_PRD: ${BUILD_REGISTRY_PRD}
+        S6_VERSION: ${S6_VERSION}
+    env_file: ./.env
+    networks:
+         meet.jitsi:
+             aliases:
+                 - xmpp.meet.jitsi
+
+    #videobridge
+  jitsi-jvb:
+    image: ${BUILD_REGISTRY}/${PROJECT}/${CONTAINER_3}:${JITSI_VERSION}
+    build: 
+      context: ./jvb
+      args:
+        JVB_DEB_VERSION: ${JVB_DEB_VERSION}
+        REGISTRY: ${REGISTRY}
+    env_file: ./.env
+    depends_on:
+        - jitsi-prosody
+    networks:
+        meet.jitsi:
+            aliases:
+                - jvb.meet.jitsi
+    #jicofo
+  jitsi-jicofo:
+    image: ${BUILD_REGISTRY}/${PROJECT}/${CONTAINER_4}:${JITSI_VERSION}
+    #image: jitsi/jicofo:stable-5142
+    build: 
+      context: ./jicofo
+      args:
+        JICOFO_DEB_VERSION: ${JICOFO_DEB_VERSION}
+        REGISTRY: ${REGISTRY}
+    depends_on:
+        - jitsi-prosody
+    env_file: ./.env
+    networks:
+        meet.jitsi:
+
+    #web
+  jitsi-web:
+    image: ${BUILD_REGISTRY}/${PROJECT}/${CONTAINER_5}:${JITSI_VERSION}
+    build: 
+      context: ./web
+      args:
+        BUILD_REGISTRY_PRD: ${BUILD_REGISTRY_PRD}
+        JITSI_DEB_VERSION: ${JITSI_DEB_VERSION}
+        REGISTRY: ${REGISTRY}
+        PROJECT: ${PROJECT}
+        S6_VERSION: ${S6_VERSION}
+    env_file: ./.env
+    networks:
+        meet.jitsi:
+            aliases:
+                - meet.jitsi
+  jitsi-turn:
+    image: ${BUILD_REGISTRY}/${PROJECT}/${CONTAINER_6}:${COTURN_VERSION}
+    build: 
+      context: ./coturn
+    env_file: ./.env
+    depends_on:
+        - jitsi-prosody
+    networks:
+        meet.jitsi:
+            aliases:
+                - meet.jitsi
+networks:
+    meet.jitsi:

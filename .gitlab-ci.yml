@@ -1,0 +1,26 @@
+build-job:
+  tags:
+    - debwithdock
+  stage: build
+  before_script:
+    - docker info
+    - |
+      apk add \
+      docker-compose \
+      openssl \
+      curl \
+      jq \
+      trivy --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing \
+      bash
+    - curl -LO https://storage.googleapis.com/container-diff/latest/container-diff-linux-amd64
+    - chmod +x container-diff-linux-amd64
+    - mv container-diff-linux-amd64 /usr/local/bin/container-diff
+  script:
+    - docker --version
+    - docker-compose --version
+    - source buildenvironment
+  parallel:
+    matrix:
+      - VERSION: ["v0.104.3"]
+        VERSION_MAJOR: ["v0.104"]
+

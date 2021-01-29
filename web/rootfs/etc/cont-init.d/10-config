@@ -1,0 +1,12 @@
+#!/usr/bin/with-contenv bash
+mkdir -p \
+    /config/{nginx/site-confs,keys} \
+    /run \
+    /var/lib/nginx/tmp/client_body \
+    /var/tmp/nginx
+cp /defaults/config.js /config/config.js
+/defaults/system-config.js.sh >> /config/config.js
+/defaults/settings-config.js.sh >> /config/config.js
+if [[ -f /config/custom-config.js ]]; then
+    cat /config/custom-config.js > /config/config.js
+fi
