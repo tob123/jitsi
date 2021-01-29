@@ -1,3 +1,10 @@
+image: coreg.appelo.org/proxy-cache/jdrouet/docker-with-buildx:stable
+variables:
+  DOCKER_TLS_CERTDIR: "/certs"
+  CI_ENABLE_SHELL_TRACE: "true"
+services:
+  - name: coreg.appelo.org/proxy-cache/library/docker:19.03-dind
+    alias: docker
 build-job:
   tags:
     - debwithdock
