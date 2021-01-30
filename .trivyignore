@@ -1,0 +1,7 @@
+#trivy detects some vulnerabilties due to outdated nodejs libraries
+#issue is there on github but no progress yet: https://github.com/jitsi/jitsi-meet/issues/8096
+CVE-2020-7788
+CVE-2019-20149
+CVE-2020-8149
+CVE-2020-15168
+CVE-2020-7789
