@@ -47,5 +47,5 @@ build-job-1:
   extends: .builder
   parallel:
     matrix:
-      - JITSI_VERSION: LATEST
+      - VERSION: LATEST
         S6_VERSION: ["v2.2.0.1"]
