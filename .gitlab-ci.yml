@@ -1,4 +1,4 @@
-#image: coreg.appelo.org/proxy-cache/jdrouet/docker-with-buildx:stable
+image: coreg.appelo.org/proxy-cache/jdrouet/docker-with-buildx:stable
 variables:
   DOCKER_TLS_CERTDIR: "/certs"
   CI_ENABLE_SHELL_TRACE: "true"
@@ -28,8 +28,8 @@ services:
     - source set_versions.sh
     - bash pull.sh
     - docker container ls
-    - docker-compose up -d
-    - docker ps -q --filter --filter health=starting --filter health=unhealthy --filter health=none
+    - docker-compose up --build -d
+    - docker ps -q --filter health=starting --filter health=unhealthy --filter health=none
     - bash ci_health.sh
     - docker ps -q -a --filter "exited=1"
     - docker ps -q -a --filter "status=exited"
