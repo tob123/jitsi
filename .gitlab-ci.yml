@@ -41,6 +41,7 @@ services:
     - docker-compose logs
     - bash compare.sh
     - bash scan.sh
+    - bash push.sh
 build-job-1:
   tags:
     - debwithdock
