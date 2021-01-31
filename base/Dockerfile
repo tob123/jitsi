@@ -28,6 +28,7 @@ RUN set -x ;\
     "/var/log/apt/term.log" \
     "/root/.gnupg/pubring.kbx" \
     "/var/log/apt/history.log" \
+    "/var/log/apt/*" \
     "/root/.gnupg/trustdb.gpg" \
     "/root/.wget-hsts" \
     "/var/cache/ldconfig/aux-cache" \

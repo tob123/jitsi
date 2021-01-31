@@ -11,6 +11,9 @@ services:
         PROJECT: ${PROJECT}
         BUILD_REGISTRY_PRD: ${BUILD_REGISTRY_PRD}
         S6_VERSION: ${S6_VERSION}
+    major_tag: 
+      extends: build
+      image: ${BUILD_REGISTRY}/${PROJECT}/${CONTAINER_2}:${VERSION_MAJOR}
     env_file: ./.env
     networks:
          meet.jitsi:
@@ -25,6 +28,9 @@ services:
       args:
         JVB_DEB_VERSION: ${JVB_DEB_VERSION}
         REGISTRY: ${REGISTRY}
+    major_tag: 
+      extends: build
+      image: ${BUILD_REGISTRY}/${PROJECT}/${CONTAINER_3}:${VERSION_MAJOR}
     env_file: ./.env
     depends_on:
         - jitsi-prosody
@@ -41,6 +47,9 @@ services:
       args:
         JICOFO_DEB_VERSION: ${JICOFO_DEB_VERSION}
         REGISTRY: ${REGISTRY}
+    major_tag: 
+      extends: build
+      image: ${BUILD_REGISTRY}/${PROJECT}/${CONTAINER_4}:${VERSION_MAJOR}
     depends_on:
         - jitsi-prosody
     env_file: ./.env
@@ -58,6 +67,9 @@ services:
         REGISTRY: ${REGISTRY}
         PROJECT: ${PROJECT}
         S6_VERSION: ${S6_VERSION}
+    major_tag: 
+      extends: build
+      image: ${BUILD_REGISTRY}/${PROJECT}/${CONTAINER_5}:${VERSION_MAJOR}
     env_file: ./.env
     networks:
         meet.jitsi:
@@ -67,6 +79,9 @@ services:
     image: ${BUILD_REGISTRY}/${PROJECT}/${CONTAINER_6}:${COTURN_VERSION}
     build: 
       context: ./coturn
+    major_tag: 
+      extends: build
+      image: ${BUILD_REGISTRY}/${PROJECT}/${CONTAINER_6}:${COTURN_VERSION_MJ}
     env_file: ./.env
     depends_on:
         - jitsi-prosody
