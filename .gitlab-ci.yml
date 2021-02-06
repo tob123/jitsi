@@ -26,9 +26,10 @@ services:
     - source buildenvironment
     - source get_versions.sh
     - source set_versions.sh
+    - docker buildx create --name multiarch-builder --use multi-context --platform $BUILDX_ARCH 
     - bash pull.sh
     - docker buildx bake --progress plain --load
-    - docker-compose up --build -d
+    - docker-compose up -d
     - docker ps -q --filter health=starting --filter health=unhealthy --filter health=none
     - bash ci_health.sh
     - docker ps -q -a --filter "exited=1"
