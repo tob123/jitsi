@@ -20,6 +20,7 @@ services:
     - curl -LO https://storage.googleapis.com/container-diff/latest/container-diff-linux-amd64
     - chmod +x container-diff-linux-amd64
     - mv container-diff-linux-amd64 /usr/local/bin/container-diff
+    - docker context create multi-context
   script:
     - docker --version
     - docker-compose --version
