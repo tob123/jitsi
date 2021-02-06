@@ -1,5 +1,5 @@
 #!/bin/bash
-#set -x
+set -x
 TAG_STRING=""
 set_tag_mj () {
 for i in 2 3 4 5; do
