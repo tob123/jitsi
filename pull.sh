@@ -9,3 +9,9 @@ if docker-compose pull ${!CONTAINER}; then
   touch ${!CONTAINER}.scan
 fi
 done
+if docker-compose pull ${CONTAINER_6}; then
+  touch ${CONTAINER_6}.compare
+  CONT_IMAGE="${BUILD_REGISTRY}/${PROJECT}/${CONTAINER_6}:${COTURN_VERSION}"
+  docker tag ${CONT_IMAGE} ${CONTAINER_6}.previous; else
+  touch ${CONTAINER_6}.scan
+fi

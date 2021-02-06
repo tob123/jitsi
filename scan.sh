@@ -9,7 +9,7 @@ if [[ -f ${!CONTAINER}.scan ]]; then
   touch ${!CONTAINER}.push
 fi
 done
-if [[ -f ${CONTAINER_6}.compare ]]; then
+if [[ -f ${CONTAINER_6}.scan ]]; then
   CONT_IMAGE="${BUILD_REGISTRY}/${PROJECT}/${CONTAINER_6}:${COTURN_VERSION}"
   trivy image --exit-code 1 -s "MEDIUM,HIGH,CRITICAL" --vuln-type library ${CONT_IMAGE} || exit 1
   trivy image --exit-code 1 -s "MEDIUM,HIGH,CRITICAL" --vuln-type os --ignore-unfixed  ${CONT_IMAGE} || exit 1

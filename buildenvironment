@@ -1,4 +1,5 @@
 export CONTAINER_1=s6-base
+export BUILDX_ARCH="linux/amd64"
 export CONTAINER_2=jitsi-prosody
 export CONTAINER_3=jitsi-jvb
 export CONTAINER_4=jitsi-jicofo
