@@ -26,6 +26,7 @@ services:
     - source buildenvironment
     - source get_versions.sh
     - source set_versions.sh
+    - bash
     - source get_tags.sh
     - bash pull.sh
     - docker buildx bake --progress plain --load
