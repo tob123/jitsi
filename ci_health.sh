@@ -5,9 +5,10 @@ while [[ -n ${HEALTH} ]] && [ $counter -le 120 ]; do
   sleep 1
   counter=$(( $counter + 1 ))
   echo $counter
-  docker ps ---filter health=starting --filter health=unhealthy --filter health=none
+  docker ps -q --filter health=starting --filter health=unhealthy --filter health=none
   if [ $counter -eq 120 ]; then
     echo $counter
+    docker-compose ps
     docker-compose logs
     exit 1
   fi
