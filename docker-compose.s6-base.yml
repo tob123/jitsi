@@ -1,9 +1,0 @@
-version: '3'
-services:
-  s6-base:
-    image: ${BUILD_REGISTRY}/${PROJECT}/${CONTAINER_1}:${S6_VERSION}
-    build:
-      context: ./base/
-      args:
-        S6_VERSION: ${S6_VERSION}
-        REGISTRY: ${REGISTRY}

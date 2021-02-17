@@ -2,7 +2,7 @@ ARG BUILD_REGISTRY_PRD
 ARG PROJECT
 ARG S6_VERSION
 FROM ${BUILD_REGISTRY_PRD}/${PROJECT}/s6-base:${S6_VERSION}
-ARG JITSI_VERSION=X.Y.Z
+ARG JITSI_VERSION_GITHUB=X.Y.Z
 RUN set -x; \
     apt-get update ; \
     apt-get --no-install-recommends install -y \
@@ -19,7 +19,7 @@ RUN set -x; \
     prosody ; \
     mkdir -p /jitsi/prosody-plugins ; \
     cd /jitsi/prosody-plugins ; \
-    curl -L --output - https://github.com/jitsi/jitsi-meet/archive/stable/jitsi-meet_${JITSI_VERSION}.tar.gz | tar zxf - --wildcards "*/resources/prosody-plugins" --strip-components=3 ; \
+    curl -L --output - https://github.com/jitsi/jitsi-meet/archive/stable/jitsi-meet_${JITSI_VERSION_GITHUB}.tar.gz | tar zxf - --wildcards "*/resources/prosody-plugins" --strip-components=3 ; \
     mkdir /etc/prosody/conf.d ; \
     ln -s /var/lib/prosody/auth.meet.jitsi.crt /etc/prosody/certs/auth.meet.jitsi.crt ; \
     ln -s /var/lib/prosody/auth.meet.jitsi.key /etc/prosody/certs/auth.meet.jitsi.key ; \

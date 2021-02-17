@@ -6,7 +6,7 @@ services:
     build: 
       context: ./prosody
       args: 
-        JITSI_VERSION: ${JITSI_VERSION}
+        JITSI_VERSION_GITHUB: ${JITSI_VERSION_GITHUB}
         REGISTRY: ${REGISTRY}
         PROJECT: ${PROJECT}
         BUILD_REGISTRY_PRD: ${BUILD_REGISTRY_PRD}

@@ -1,6 +1,0 @@
-FROM tob123/s6-base
-RUN apt-get update && \
-    apt-get install -y nginx && \
-    echo "daemon off;" >> /etc/nginx/nginx.conf
-ENTRYPOINT ["/init"]
-CMD ["nginx"]
