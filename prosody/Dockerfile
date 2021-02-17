@@ -3,7 +3,7 @@ ARG PROJECT
 ARG S6_VERSION
 FROM ${BUILD_REGISTRY_PRD}/${PROJECT}/s6-base:${S6_VERSION}
 ARG JITSI_VERSION_GITHUB=X.Y.Z
-RUN set -x; \
+RUN set -ex; \
     apt-get update ; \
     apt-get --no-install-recommends install -y \
     curl \
