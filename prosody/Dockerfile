@@ -1,3 +1,4 @@
+FROM coreg.appelo.org/proxy-cache/jitsi/prosody:stable-5390-3 as JITSI_PROSODY
 ARG BUILD_REGISTRY_PRD
 ARG PROJECT
 ARG S6_VERSION
@@ -15,11 +16,16 @@ RUN set -ex; \
     echo deb http://packages.prosody.im/debian stable main | tee -a /etc/apt/sources.list ; \
     apt-get update ; \
     apt-get --no-install-recommends install -y \
-    lua-sec \
-    prosody ; \
+    prosody \
+    libssl1.1 \
+    sasl2-bin \
+    libsasl2-modules-ldap \
+    lua-basexx \
+    lua-ldap \
+    lua-sec ; \
     mkdir -p /jitsi/prosody-plugins ; \
-    cd /jitsi/prosody-plugins ; \
-    curl -L --output - https://github.com/jitsi/jitsi-meet/archive/stable/jitsi-meet_${JITSI_VERSION_GITHUB}.tar.gz | tar zxf - --wildcards "*/resources/prosody-plugins" --strip-components=3 ; \
+COPY --from=JITSI_PROSODY /usr/local/lib/lua /usr/local/lib/lua
+COPY --from=JITSI_PROSODY /usr/local/share/lua /usr/local/share/lua
     mkdir /etc/prosody/conf.d ; \
     ln -s /var/lib/prosody/auth.meet.jitsi.crt /etc/prosody/certs/auth.meet.jitsi.crt ; \
     ln -s /var/lib/prosody/auth.meet.jitsi.key /etc/prosody/certs/auth.meet.jitsi.key ; \
