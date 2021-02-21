@@ -28,7 +28,7 @@ RUN set -ex; \
     lua-sec ; \
     mkdir -p /jitsi/prosody-plugins ; \
     cd /jitsi/prosody-plugins ; \
-    curl -L --output - https://github.com/jitsi/jitsi-meet/archive/stable/jitsi-meet_${JITSI_VERSION_GITHUB}.tar.gz | tar zxf - --wildcards "*/resources/prosody-plugins" --strip-components=3 ; \
+    curl -L --output - https://github.com/jitsi/jitsi-meet/archive/stable/jitsi-meet_${JITSI_VERSION_GITHUB}.tar.gz | tar zxf - --wildcards "*/resources/prosody-plugins" --strip-components=3
 COPY --from=JITSI_PROSODY /usr/local/lib/lua /usr/local/lib/lua
 COPY --from=JITSI_PROSODY /usr/local/share/lua /usr/local/share/lua
 RUN mkdir /etc/prosody/conf.d ; \
