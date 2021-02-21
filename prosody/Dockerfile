@@ -23,7 +23,7 @@ RUN set -ex; \
     lua-basexx \
     lua-ldap \
     lua-sec ; \
-    mkdir -p /jitsi/prosody-plugins ; \
+    mkdir -p /jitsi/prosody-plugins
 COPY --from=JITSI_PROSODY /usr/local/lib/lua /usr/local/lib/lua
 COPY --from=JITSI_PROSODY /usr/local/share/lua /usr/local/share/lua
     mkdir /etc/prosody/conf.d ; \
