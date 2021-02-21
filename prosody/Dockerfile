@@ -26,7 +26,7 @@ RUN set -ex; \
     mkdir -p /jitsi/prosody-plugins
 COPY --from=JITSI_PROSODY /usr/local/lib/lua /usr/local/lib/lua
 COPY --from=JITSI_PROSODY /usr/local/share/lua /usr/local/share/lua
-    mkdir /etc/prosody/conf.d ; \
+RUN mkdir /etc/prosody/conf.d ; \
     ln -s /var/lib/prosody/auth.meet.jitsi.crt /etc/prosody/certs/auth.meet.jitsi.crt ; \
     ln -s /var/lib/prosody/auth.meet.jitsi.key /etc/prosody/certs/auth.meet.jitsi.key ; \
     ln -s /var/lib/prosody/meet.jitsi.crt /etc/prosody/certs/meet.jitsi.crt ; \
