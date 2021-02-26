@@ -3,7 +3,7 @@ ssl = {
         key = "/etc/prosody/certs/auth.meet.jitsi.key";
         certificate = "/etc/prosody/certs/auth.meet.jitsi.crt";
     }
-    authentication = "internal_plain"
+    authentication = "internal_hashed"
 
 VirtualHost "recorder.meet.jitsi"
   modules_enabled = {

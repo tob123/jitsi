@@ -53,15 +53,7 @@ RUN chmod +x /usr/local/bin/checkcontainer.sh
 #    chown -R jitsiadmin /etc/cont-init.d ; \
 #    chown -R jitsiadmin:prosody /etc/prosody
 ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2 \
-    ENABLE_XMPP_WEBSOCKET=0 \
-    PUBLIC_URL=bla.nu.me \
-    ENABLE_TURN=1 \
-    TURN_DOMAIN=turn.bla.me \
-    JVB_AUTH_USER=jvb \
-    ENABLE_AUTH=1 \
-    JICOFO_AUTH_USER=focus \
-    AUTHORIZED_USER=conference_admin \
-    LOG_LEVEL=info
+    PROSODY_LOG_LEVEL=info
 #USER jitsiadmin
 HEALTHCHECK CMD /usr/local/bin/checkcontainer.sh
 ENTRYPOINT [ "/init" ]

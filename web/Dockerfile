@@ -48,4 +48,4 @@ ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2 \
 #USER jitsiadmin
 
 ENTRYPOINT [ "/init" ]
-HEALTHCHECK CMD curl -f http://localhost:8080/ | grep jitsi || exit 1
+HEALTHCHECK CMD curl -f http://localhost | grep jitsi || exit 1

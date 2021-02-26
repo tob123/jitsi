@@ -14,13 +14,8 @@ cat <<EOF
 config.hosts.muc = 'muc.meet.jitsi';
 config.bosh = '/http-bind';
 EOF
-if [[ $ENABLE_TURN -eq 1 ]]; then
+if [[ $ENABLE_XMPP_WEBSOCKET -eq 1 ]]; then
   cat <<EOF
-config.useStunTurn = true;
-EOF
-fi
-if [[ $ENABLE_TURN_P2P -eq 1 ]]; then
-  cat <<EOF
-config.p2p.useStunTurn = true;
+config.websocket = 'wss://${WS_DOMAIN}/xmpp-websocket';
 EOF
 fi

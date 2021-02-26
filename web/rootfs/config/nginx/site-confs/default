@@ -1,4 +1,5 @@
 server {
-	listen 8080 default_server;
-	include /config/nginx/meet.conf;
+        listen 80 default_server;
+        listen [::]:80 default_server;
+        include /config/nginx/meet.conf;
 }

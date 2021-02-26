@@ -1,7 +1,7 @@
 #!/bin/bash
-export RESOLUTION=720
-export RESOLUTION_MIN=180
 export ENABLE_AUTH=1
+export ENABLE_XMPP_WEBSOCKET=1
+export WS_DOMAIN="test.jitsi.nu"
 
-./settings-config.js.sh
-./system-config.js.sh
+#./settings-config.js.sh
+#./system-config.js.sh
