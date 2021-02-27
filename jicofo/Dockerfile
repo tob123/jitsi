@@ -25,6 +25,8 @@ RUN set -ex ; \
    rm -rf /var/cache/apt /var/lib/apt/lists/* \
     rm -rf /var/cache/apt /var/lib/apt/lists/* \
     "/var/log/dpkg.log" \
+    "/var/log/apt/term.log" \
+    "/var/log/apt/history.log" \
     "/var/log/apt/*" \
     "/root/.gnupg/pubring.kbx" \
     "/var/log/alternatives.log" \

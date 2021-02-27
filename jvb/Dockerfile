@@ -18,6 +18,8 @@ RUN set -ex ; \
     apt-get clean ; \
     rm -rf /var/cache/apt /var/lib/apt/lists/* \
     "/var/log/dpkg.log" \
+    "/var/log/apt/term.log" \
+    "/var/log/apt/history.log" \
     "/var/log/apt/*" \
     "/var/cache/ldconfig/aux-cache" \
     "/var/log/alternatives.log" \
