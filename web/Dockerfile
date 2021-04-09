@@ -20,6 +20,9 @@ RUN set -ex; \
     dpkg -x /var/cache/apt/archives/jitsi-meet-web-config*.deb /tmp/pkg && \
     mv /tmp/pkg/usr/share/jitsi-meet-web-config/config.js /defaults && \
 	rm -f /etc/nginx/conf.d/default.conf && \
+    # test with up2date npm based packages
+    apt-get remove -y --autoremove jitsi-meet-web; \
+    dpkg -i /root/jitsi-meet-web*;\
     apt-get remove -y --autoremove ca-certificates gnupg ; \
     apt-get clean ; \
 	rm -rf /tmp/pkg /var/cache/apt /var/lib/apt/lists/* \
