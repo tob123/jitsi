@@ -93,10 +93,10 @@ EOF
 EOF
 fi
 
-if [[ -z $JICOFO_SECRET ]]; then
-   1>&2 echo 'FATAL ERROR: Jicofo component secret and auth password must be set'
-   exit 1
-fi
+#if [[ -z $JICOFO_SECRET ]]; then
+#   1>&2 echo 'FATAL ERROR: Jicofo component secret and auth password must be set'
+#   exit 1
+#fi
 cat <<EOF
 Component "focus.meet.jitsi" "client_proxy"
     target_address = "focus@auth.meet.jitsi"
