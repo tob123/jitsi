@@ -8,6 +8,7 @@ chmod 640 /etc/prosody/conf.d/bla.meet.jitsi.cfg.lua
 chmod 640 /etc/prosody/global.cfg.lua
 prosodyctl register $JVB_AUTH_USER auth.meet.jitsi $JVB_AUTH_PASSWORD
 prosodyctl register $JICOFO_AUTH_USER auth.meet.jitsi $JICOFO_AUTH_PASSWORD
+prosodyctl mod_roster_command subscribe focus.meet.jitsi focus@auth.meet.jitsi
 if [[ $ENABLE_AUTH -eq 1 ]]; then
 prosodyctl register ${AUTHORIZED_USER} meet.jitsi ${AUTHORIZED_USER_PASS}
 fi

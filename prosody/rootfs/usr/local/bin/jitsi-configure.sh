@@ -99,6 +99,6 @@ if [[ -z $JICOFO_SECRET ]]; then
 fi
 cat <<EOF
 Component "focus.meet.jitsi" "client_proxy"
-    target_adress = "focus@auth.meet.jitsi"
+    target_address = "focus@auth.meet.jitsi"
 EOF
 echo "--prosody virtualhost configuration options end"
