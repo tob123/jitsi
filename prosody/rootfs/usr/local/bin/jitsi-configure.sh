@@ -37,7 +37,7 @@ EOF
 fi
 if [[ $ENABLE_TURN -eq 1 ]]; then
   cat <<EOF
-      "turncredentials";
+      "external_services";
 EOF
 fi
 if [[ $ENABLE_AUTH -eq 0 ]]; then
@@ -68,7 +68,7 @@ VirtualHost "guest.meet.jitsi"
 EOF
   if [[ $ENABLE_TURN -eq 1 ]]; then
     cat <<EOF
-      "turncredentials";
+      "external_services";
 EOF
   fi
 cat <<EOF
