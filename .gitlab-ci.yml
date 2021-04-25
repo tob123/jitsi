@@ -1,9 +1,9 @@
-image: coreg.appelo.org/proxy-cache/jdrouet/docker-with-buildx:stable
+image: $BUILD_REGISTRY_PRD/proxy-cache/jdrouet/docker-with-buildx:stable
 variables:
   DOCKER_TLS_CERTDIR: "/certs"
   CI_ENABLE_SHELL_TRACE: "true"
 services:
-  - name: coreg.appelo.org/proxy-cache/library/docker:20.10-dind
+  - name: $BUILD_REGISTRY_PRD/proxy-cache/library/docker:20.10-dind
     alias: docker
 .builder:
   stage: build
