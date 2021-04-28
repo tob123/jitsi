@@ -35,20 +35,7 @@ RUN set -ex; \
 #    chown -R jitsiadmin /etc/cont-init.d ; \
 #    chown -R jitsiadmin:prosody /etc/prosody
 ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2 \
-    ENABLE_XMPP_WEBSOCKET=0 \
-    PUBLIC_URL=bla.nu.me \
-    ENABLE_TURN=1 \
-    ENABLE_TURN_P2P=1 \
-    TURN_DOMAIN=turn.bla.me \
-    JVB_AUTH_USER=jvb \
-    ENABLE_AUTH=1 \
-    JICOFO_AUTH_USER=focus \
-    LOG_LEVEL=info \
-    RESOLUTION_MIN=180 \
-    RESOLUTION=720 \
-    RESOLUTION_WIDTH=1280 \
-    RESOLUTION_WIDTH_MIN=320
-#USER jitsiadmin
+    ENABLE_PREJOIN_PAGE=1
 
 ENTRYPOINT [ "/init" ]
 HEALTHCHECK CMD curl -f http://localhost | grep jitsi || exit 1

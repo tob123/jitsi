@@ -19,3 +19,8 @@ if [[ $ENABLE_XMPP_WEBSOCKET -eq 1 ]]; then
 config.websocket = 'wss://${WS_DOMAIN}/xmpp-websocket';
 EOF
 fi
+if [[ $ENABLE_PREJOIN_PAGE -eq 1 ]]; then
+  cat <<EOF
+config.prejoinPageEnabled = true;
+EOF
+fi
