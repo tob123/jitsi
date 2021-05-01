@@ -36,15 +36,7 @@ RUN set -ex ; \
     "/etc/jitsi/jicofo/config" \
     "/var/cache/debconf/passwords.dat" \
     "/root/.gnupg/pubring.kbx~"
-ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2 \
-    ENABLE_XMPP_WEBSOCKET=0 \
-    PUBLIC_URL=bla.nu.me \
-    ENABLE_TURN=1 \
-    TURN_DOMAIN=turn.bla.me \
-    JVB_AUTH_USER=jvb \
-    ENABLE_AUTH=1 \
-    JICOFO_AUTH_USER=focus \
-    LOG_LEVEL=info
+ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2
 USER jicofo
 
 ENTRYPOINT [ "/usr/local/bin/entry.sh" ]

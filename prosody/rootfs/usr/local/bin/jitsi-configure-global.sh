@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "----custom prosody global config options start----"
-if [[ $ENABLE_XMPP_WEBSOCKET -eq 1 ]]; then
+if [[ $DISABLE_XMPP_WEBSOCKET -eq 0 ]]; then
 cat <<EOF
 cross_domain_websocket = { "${PUBLIC_URL}","https://meet.jitsi" };
 EOF

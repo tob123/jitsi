@@ -8,7 +8,7 @@ ssl = {
     }
 EOF
 if [[ $ENABLE_AUTH -eq 0 ]]; then
-  if [[ $ENABLE_XMPP_WEBSOCKET -eq 1 ]]; then
+  if [[ $DISABLE_XMPP_WEBSOCKET -eq 0 ]]; then
     cat <<EOF
     authentication = "token"
     app_id = ""
@@ -29,7 +29,7 @@ modules_enabled = {
       "speakerstats";
       "conference_duration";
 EOF
-if [[ $ENABLE_XMPP_WEBSOCKET -eq 1 ]]; then
+if [[ $DISABLE_XMPP_WEBSOCKET -eq 0 ]]; then
   cat <<EOF
   "websocket";
   "smacks";
@@ -74,7 +74,7 @@ EOF
 cat <<EOF
 }
 EOF
-  if [[ $ENABLE_XMPP_WEBSOCKET -eq 1 ]]; then
+  if [[ $DISABLE_XMPP_WEBSOCKET -eq 0 ]]; then
     cat <<EOF
     authentication = "token"
     app_id = ""

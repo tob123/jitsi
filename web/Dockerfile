@@ -34,8 +34,6 @@ RUN set -ex; \
 #    adduser --shell /bin/bash --gecos 'admin user' --uid 2000 --disabled-password jitsiadmin ; \
 #    chown -R jitsiadmin /etc/cont-init.d ; \
 #    chown -R jitsiadmin:prosody /etc/prosody
-ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2 \
-    ENABLE_PREJOIN_PAGE=1
-
+ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2
 ENTRYPOINT [ "/init" ]
 HEALTHCHECK CMD curl -f http://localhost | grep jitsi || exit 1

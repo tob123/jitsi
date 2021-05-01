@@ -29,18 +29,7 @@ RUN set -ex ; \
     chmod +x /usr/local/bin/entry.sh /usr/local/bin/remove_setuid.sh ; \
     /usr/local/bin/remove_setuid.sh
 ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2 \
-    PUBLIC_URL_DOMAIN=bla.nu.me \
-    ENABLE_TURN=1 \
-    TURN_DOMAIN=turn.bla.me \
-    JVB_PORT=10000 \
-    XMPP_SERVER=xmpp.meet.jitsi \
-    XMPP_AUTH_DOMAIN=auth.meet.jitsi \
-    JVB_AUTH_USER=jvb \
-    XMPP_INTERNAL_MUC_DOMAIN=internal-muc.meet.jitsi \
-    DOCKER_HOST_ADDRESS= \
-    JVB_ENABLE_APIS=rest,colibri \
-    JVB_STUN_SERVER=bla.stun.now \
-    XMPP_SERVER=xmpp.meet.jitsi
+    JVB_ENABLE_APIS=rest,colibri
     
 USER jvb
 ENTRYPOINT [ "/usr/local/bin/entry.sh" ]

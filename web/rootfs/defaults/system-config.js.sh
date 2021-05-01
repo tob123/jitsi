@@ -1,4 +1,5 @@
 #!/bin/bash
+WS_DOMAIN=`echo $PUBLIC_URL | awk -F '/' {'print $3'}`
 cat <<EOF
 if (!config.hasOwnProperty('hosts')) config.hosts = {};
 config.hosts.domain = 'meet.jitsi';
@@ -14,12 +15,12 @@ cat <<EOF
 config.hosts.muc = 'muc.meet.jitsi';
 config.bosh = '/http-bind';
 EOF
-if [[ $ENABLE_XMPP_WEBSOCKET -eq 1 ]]; then
+if [[ $DISABLE_XMPP_WEBSOCKET -eq 0 ]]; then
   cat <<EOF
 config.websocket = 'wss://${WS_DOMAIN}/xmpp-websocket';
 EOF
 fi
-if [[ $ENABLE_PREJOIN_PAGE -eq 1 ]]; then
+if [[ $DISABLE_PREJOIN_PAGE -eq 0 ]]; then
   cat <<EOF
 config.prejoinPageEnabled = true;
 EOF

@@ -8,8 +8,6 @@ RUN apk add --no-cache \
              /usr/local/bin/detect-external-ip.sh ; \
     mkdir /var/run/coturn ; \
     chown turnserver /var/lib/coturn /var/run/coturn
-ENV TURN_VERBOSE=0 \
-    TURN_DOMAIN=
 USER turnserver
 ENTRYPOINT ["entry.sh"]
 
