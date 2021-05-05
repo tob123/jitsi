@@ -66,5 +66,8 @@ All containers needed for jitsi are rebuilt on a daily basis using gitlab ci/cd:
 |jicofo|session manager between participants and videobridge|docker container|https://github.com/jitsi/jicofo|
 |videobridge|in case more than 2 participants are part of a conference the videobridge is required|docker container|https://github.com/jitsi/jitsi-videobridge|
 |coTURN|required in case no direct connection can be made to the videobridge|docker container|https://github.com/coturn/coturn|
-#container setup"
 
+# container setup
+create directory for docker-compose and environment files and get them from here: 
+`root@debian10:/my_jitsi_containers#
+ 
