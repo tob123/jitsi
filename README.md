@@ -103,7 +103,7 @@ jitsi_web_1        /init                            Up (healthy)   0.0.0.0:8289-
 get renew_turn_cert.sh from  [sample](/sample/) to /usr/local/sbin/and make it executable
 <pre>
 chmod 755 /usr/local/sbin/renew_turn_cert.sh
-root@debian10:/my_containers/jitsi# certbot certonly -d myturndomain.somewhere.nu --deploy-hook /usr/local/sbin/renew_turn_cert.sh
+root@debian10:/my_containers/jitsi# <b>certbot certonly -d myturndomain.somewhere.nu --deploy-hook /usr/local/sbin/renew_turn_cert.sh</b>
 Saving debug log to /var/log/letsencrypt/letsencrypt.log
 
 How would you like to authenticate with the ACME CA?
