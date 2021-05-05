@@ -1,4 +1,4 @@
-FROM alpine:3.13
+FROM ${REGISTRY}/library/alpine:3.13
 COPY rootfs /
 RUN apk add --no-cache \
     curl \
