@@ -6,7 +6,7 @@ Goal of this repo is to have something in place for single host / vm deployments
 At the same time this config allows run other webservices on the same host /vm.
 If code from this repo could go to the original repo part of jitsi I would be all for it.
 A few things are added compared to the original docker jitsi setup:
-# coturn server intgration#
+# coturn server integration#
 coturn is useful in case of firewall issues for conference clients. see also here:
 https://jitsi.github.io/handbook/docs/devops-guide/turn
 Running turn in docker helps in terms of isolating coturn from the rest of the network and services that run on the vm / host.
