@@ -71,8 +71,8 @@ All containers needed for jitsi are rebuilt on a daily basis using gitlab ci/cd:
 create some directory for docker-compose and environment files and get them from here [sample](/sample/)
 the .env file contains some passwords. adjust the .env file or use genpw to create random passwords
 ```
-root@debian10:/my_jitsi_containers# sh genpw.sh
-root@debian10:/my_jitsi_containers# sh genpw.sh
+root@debian10:/my_containers/jitsi# sh genpw.sh
+root@debian10:/my_containers/jitsi# sh genpw.sh
 ```
 the .env_global contains a reference to your domain and the turn domain plus other variables.
 adjust the config so it includes your domains and activate turn:
