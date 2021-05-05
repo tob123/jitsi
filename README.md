@@ -68,7 +68,7 @@ All containers needed for jitsi are rebuilt on a daily basis using gitlab ci/cd:
 |coTURN|required in case no direct connection can be made to the videobridge|docker container|https://github.com/coturn/coturn|
 
 # container setup
-create directory for docker-compose and environment files and get them from here: 
+create directory for docker-compose and environment files and get them from here [sample](/sample/)
 
 `root@debian10:/my_jitsi_containers#`
  
