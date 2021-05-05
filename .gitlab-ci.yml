@@ -7,6 +7,10 @@ services:
     alias: docker
 .builder:
   stage: build
+  except:
+    changes:
+    - README.md
+    - sample
   before_script:
     - docker info
     - |
