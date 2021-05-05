@@ -69,5 +69,6 @@ All containers needed for jitsi are rebuilt on a daily basis using gitlab ci/cd:
 
 # container setup
 create directory for docker-compose and environment files and get them from here: 
-`root@debian10:/my_jitsi_containers#
+
+`root@debian10:/my_jitsi_containers#`
  
