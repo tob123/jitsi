@@ -9,7 +9,7 @@ A few things are added compared to the original docker jitsi setup:
 # coturn server intgration#
 coturn is useful in case of firewall issues for conference clients. see also here:
 https://jitsi.github.io/handbook/docs/devops-guide/turn
-Running turn in docker helps in terms of isolating coturn from the rest of the network.
+Running turn in docker helps in terms of isolating coturn from the rest of the network and services that run on the vm / host.
 # automatic building #
 All containers needed for jitsi are rebuilt on a daily basis using gitlab ci/cd: this helps to update dependencies / identify and fix CVE's.
 # overview of daemons / ports
