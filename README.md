@@ -54,7 +54,7 @@ All containers needed for jitsi are rebuilt on a daily basis using gitlab ci/cd:
                 |        |         
                 +--------+
 ````
-# more info on the daemons
+# more info on the daemons, containers
 
 | name | purpose | type | more info |
 | ------ | ------ | ------ | ------ |
