@@ -101,7 +101,7 @@ jitsi_web_1        /init                            Up (healthy)   0.0.0.0:8289-
 ```
 # configure letsencrypt certificate for turn
 get renew_turn_cert.sh from  [sample](/sample/) to /usr/local/sbin/and make it executable
-```
+<pre>
 chmod 755 /usr/local/sbin/renew_turn_cert.sh
 root@debian10:/my_containers/jitsi# certbot certonly -d myturndomain.somewhere.nu --deploy-hook /usr/local/sbin/renew_turn_cert.sh
 Saving debug log to /var/log/letsencrypt/letsencrypt.log
@@ -112,10 +112,10 @@ How would you like to authenticate with the ACME CA?
 2: Spin up a temporary webserver (standalone)
 3: Place files in webroot directory (webroot)
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-Select the appropriate number [1-3] then [enter] (press 'c' to cancel): 1
+Select the appropriate number [1-3] then [enter] (press 'c' to cancel): <b>1</b>
 Plugins selected: Authenticator nginx, Installer None
 Obtaining a new certificate
 Running deploy-hook command: /usr/local/sbin/renew_turn_cert.sh
 Output from renew_turn_cert.sh:
 jitsi_turn_1
-```
+</pre>
