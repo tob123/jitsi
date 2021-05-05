@@ -67,8 +67,37 @@ All containers needed for jitsi are rebuilt on a daily basis using gitlab ci/cd:
 |videobridge|in case more than 2 participants are part of a conference the videobridge is required|docker container|https://github.com/jitsi/jitsi-videobridge|
 |coTURN|required in case no direct connection can be made to the videobridge|docker container|https://github.com/coturn/coturn|
 
-# container setup
-create directory for docker-compose and environment files and get them from here [sample](/sample/)
+# container setup example including turn.
+create some directory for docker-compose and environment files and get them from here [sample](/sample/)
+the .env file contains some passwords. adjust the .env file or use genpw to create random passwords
+```
+root@debian10:/my_jitsi_containers# sh genpw.sh
+root@debian10:/my_jitsi_containers# sh genpw.sh
+```
+the .env_global contains a reference to your domain and the turn domain plus other variables.
+adjust the config so it includes your domains and activate turn:
+```bash
+# Public URL  and domain for the web service (required)
+PUBLIC_URL=https://myjitsi.somewhere.nu
 
-`root@debian10:/my_jitsi_containers#`
- 
+#turn needs a separate domain name. required in case ENABLE_TURN is set to 1
+TURN_DOMAIN=myturndomain.somewhere.nu
+
+#activate the usage of turn to allow users to connect via other ports than udp 10000 to jitsi
+ENABLE_TURN=1
+.....
+```
+see below for other variables you might want to adjust
+bring up the containers and check they are healthy
+```
+root@debian10:/my_containers/jitsi# docker-compose up -d
+root@debian10:/my_containers/jitsi# docker-compose ps
+jitsi_jicofo_1     /usr/local/bin/entry.sh /u ...   Up (healthy)                                                           
+jitsi_jvb_1        /usr/local/bin/entry.sh /u ...   Up (healthy)   0.0.0.0:10000->10000/udp                                
+jitsi_prosody_1    /init                            Up (healthy)                                                           
+jitsi_turn_1       entry.sh log-file=stdout ...     Up (healthy)   3478/tcp, 0.0.0.0:3478->3478/udp, 0.0.0.0:5349->5349/tcp
+jitsi_web_1        /init                            Up (healthy)   0.0.0.0:8289->80/tcp                                    
+
+```
+
+
