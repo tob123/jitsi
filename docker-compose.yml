@@ -82,6 +82,8 @@ services:
     image: ${BUILD_REGISTRY}/${PROJECT}/${CONTAINER_6}:${COTURN_VERSION}
     build: 
       context: ./coturn
+      args:
+        REGISTRY: ${REGISTRY}
     volumes:
         - /data/data1/dockervols/jitsi/coturn/certs:/etc/coturn/certs
     ports:

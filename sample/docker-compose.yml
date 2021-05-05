@@ -1,0 +1,80 @@
+version: '3'
+services:
+    web:
+        image: ${MY_CONTAINER_REPO}tob123/jitsi-web:stable
+        restart: unless-stopped
+        ports:
+            - '${HTTP_PORT}:80'
+        env_file:
+            - ./.env_global
+        networks:
+            meet.jitsi:
+                aliases:
+                    - meet.jitsi
+    prosody:
+        image: ${MY_CONTAINER_REPO}tob123/jitsi-prosody:stable
+        restart: unless-stopped
+        env_file:
+            - ./.env_global
+        environment:
+            - AUTHORIZED_USER
+            - AUTHORIZED_USER_PASS
+            - JICOFO_AUTH_PASSWORD
+            - JICOFO_AUTH_USER
+            - JVB_AUTH_PASSWORD
+            - JVB_AUTH_USER
+            - TURN_PASSWORD
+        networks:
+            meet.jitsi:
+                aliases:
+                    - xmpp.meet.jitsi
+    jicofo:
+        image: ${MY_CONTAINER_REPO}tob123/jitsi-jicofo:stable
+        restart: unless-stopped
+        env_file:
+            - ./.env_global
+        environment:
+            - JICOFO_AUTH_PASSWORD
+            - JICOFO_AUTH_USER
+        depends_on:
+            - prosody
+        networks:
+            meet.jitsi:
+    jvb:
+        image: ${MY_CONTAINER_REPO}tob123/jitsi-jvb:stable
+        restart: unless-stopped
+        ports:
+            - '10000:10000/udp'
+        env_file:
+            - ./.env_global
+        environment:
+            - JVB_AUTH_USER
+            - JVB_AUTH_PASSWORD
+        depends_on:
+            - prosody
+        networks:
+            meet.jitsi:
+                aliases:
+                    - jvb.meet.jitsi
+    turn:
+        image: ${MY_CONTAINER_REPO}tob123/jitsi-turn:stable
+        restart: unless-stopped
+        volumes:
+            - /data/data1/dockervols/jitsi/coturn/certs:/etc/coturn/certs
+        ports:
+            - '3478:3478/udp'
+            - '5349:5349'
+        env_file:
+            - ./.env_global
+        environment:
+            - TURN_PASSWORD
+        depends_on:
+           - prosody
+           - jvb
+        networks:
+            meet.jitsi:
+                aliases:
+                    - meet.jitsi
+networks:
+    meet.jitsi:
+
