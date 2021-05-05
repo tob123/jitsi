@@ -12,7 +12,7 @@ https://jitsi.github.io/handbook/docs/devops-guide/turn
 Running turn in docker helps in terms of isolating coturn from the rest of the network.
 # automatic building #
 All containers needed for jitsi are rebuilt on a daily basis using gitlab ci/cd: this helps to update dependencies / identify and fix CVE's.
-# overview of daemons / ports overview
+# overview of daemons / ports
 ```` 
               Public ip 23.X.Y.Z
   +----------------------------------------------------------------+
@@ -54,7 +54,7 @@ All containers needed for jitsi are rebuilt on a daily basis using gitlab ci/cd:
                 |        |         
                 +--------+
 ````
-# overview of daemons / ports purpose
+# more info on the daemons
 
 | name | purpose | type | more info |
 | ------ | ------ | ------ | ------ |
