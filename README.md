@@ -55,3 +55,8 @@ All containers needed for jitsi are rebuilt on a daily basis using gitlab ci/cd:
                 |        |         
                 +--------+
 ````
+
+| name | purpose | type | more info |
+| ------ | ------ | ------ | ------ |
+| HAProxy | uses SNI to distinguish traffic for TLS coTURN traffic from  https traffic | daemon on host | https://www.haproxy.org/ |
+| Nginx | Nginx instance that runs on the host, needed for letsencrypt certificate renewals and to send traffic to jitsi nginx (on docker) | daemon on host | https://nginx.org/en/ |
