@@ -12,7 +12,7 @@ https://jitsi.github.io/handbook/docs/devops-guide/turn
 Running turn in docker helps in terms of isolating coturn from the rest of the network and services that run on the vm / host.
 # automatic building #
 All containers needed for jitsi are rebuilt on a daily basis using gitlab ci/cd: this helps to update dependencies / identify and fix CVE's.
-# overview of daemons / ports
+# overview of services / ports
 ```` 
               Public ip 23.X.Y.Z
   +----------------------------------------------------------------+
@@ -37,8 +37,8 @@ All containers needed for jitsi are rebuilt on a daily basis using gitlab ci/cd:
             |                                          9090     |
             |   +-------------+                          ^      |
             |   |             |                          |      |
-            +-->+ Nginx jitsi +--------------------------+      |  
-            8289|             |                                 |
+            +-->+ jitsi web   +--------------------------+      |  
+            8289|  (nginx)    |                                 |
                 +--+-+--------+                                 |
                    | |                                          |
 +------------+     | |    +--------------+                      |
@@ -119,3 +119,27 @@ Running deploy-hook command: /usr/local/sbin/renew_turn_cert.sh
 Output from renew_turn_cert.sh:
 jitsi_turn_1
 </pre>
+
+# daemons on the host
+
+## nginx, letsencrypt
+get the nginx jitsi.conf to /etc/nginx/sites-available/jits.conf from  [sample](/sample/) and adjust the domain name so it matches your domain:
+<pre>
+server {
+    server_name <b>myjitsi.somewhere.nu</b>;
+    access_log /var/log/nginx/$host.log;
+.............
+.............
+server {
+    listen 80;
+    server_name <b>myjitsi.somewhere.nu</b>;
+}
+</pre>
+activate the config
+ ```
+ root@debian10:/etc/nginx/sites-available# ln -s /etc/nginx/sites-available/jitsi.conf /etc/nginx/sites-enabled/jitsi.conf
+root@debian10:/etc/nginx/sites-available# nginx -t
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+root@debian10:/etc/nginx/sites-available# systemctl restart nginx.service 
+```
