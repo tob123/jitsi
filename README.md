@@ -123,23 +123,104 @@ jitsi_turn_1
 # daemons on the host
 
 ## nginx, letsencrypt
-get the nginx jitsi.conf to /etc/nginx/sites-available/jits.conf from  [sample](/sample/) and adjust the domain name so it matches your domain:
+get the nginx jitsi.conf to /etc/nginx/sites-available/jitsi.conf from  [sample](/sample/) and adjust the domain name so it matches your domain:
 <pre>
-server {
+  server {
     server_name <b>myjitsi.somewhere.nu</b>;
     access_log /var/log/nginx/$host.log;
-.............
-.............
+    location ^ /colibri-ws {
+        proxy_pass http://localhost:8289/colibri-ws;
+        proxy_http_version 1.1;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Upgrade $http_upgrade;
+        tcp_nodelay on;
+      proxy_set_header Host $host;
+      proxy_set_header X-Real-IP $remote_addr;
+      proxy_set_header X-Forwarded-Server $host;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+    location / {
+      add_header X-Content-Type-Options nosniff;
+      add_header X-XSS-Protection "1; mode=block";
+      add_header Referrer-Policy "strict-origin-when-cross-origin";
+      proxy_set_header Host $host;
+      proxy_set_header X-Real-IP $remote_addr;
+      proxy_set_header X-Forwarded-Server $host;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header X-Forwarded-Proto $scheme;
+      proxy_pass          http://localhost:8289;
+      add_header Strict-Transport-Security "max-age=63072000; includeSubdomains;";
+      gzip off;
+    }
+
+    location = /xmpp-websocket {
+    proxy_pass http://localhost:8289/xmpp-websocket?$args;
+    proxy_http_version 1.1;
+    proxy_set_header Connection "Upgrade";
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Host $host;
+    proxy_read_timeout 900s;
+    }
+    listen 4443 ssl http2;
+
+}
 server {
     listen 80;
     server_name <b>myjitsi.somewhere.nu</b>;
 }
+
 </pre>
 activate the config
  ```
- root@debian10:/etc/nginx/sites-available# ln -s /etc/nginx/sites-available/jitsi.conf /etc/nginx/sites-enabled/jitsi.conf
+root@debian10:/etc/nginx/sites-available# ln -s /etc/nginx/sites-available/jitsi.conf /etc/nginx/sites-enabled/jitsi.conf
 root@debian10:/etc/nginx/sites-available# nginx -t
 nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
 nginx: configuration file /etc/nginx/nginx.conf test is successful
 root@debian10:/etc/nginx/sites-available# systemctl restart nginx.service 
 ```
+afterwards run certbot, activate ceritifcate for your jitsi domain and restart nginx again.
+```
+certbot
+...
+```
+## go-mmproxy
+go-mmproxy is in the debian bullseye release. get it by activating the repository for bullseye or just download / install it:
+```
+root@debian10:# wget http://ftp.de.debian.org/debian/pool/main/g/go-mmproxy/go-mmproxy_2.0-1+b3_amd64.deb
+root@debian10:# dpkg -i go-mmproxy_2.0-1+b3_amd64.deb
+```
+get go-mmproxy-ssl.service from [sample](/sample/) and save it in in directory /etc/systemd/system
+create a user and activate,enable the service
+```
+root@debian10:/etc/systemd/system# adduser --system mmproxy
+root@debian10:/etc/systemd/system# systemctl enable go-mmproxy-ssl.service
+root@debian10:/etc/systemd/system# systemctl start go-mmproxy-ssl.service
+```
+## haproxy
+adjust haproxy config:
+<pre>
+frontend main
+        mode    tcp
+        bind 0.0.0.0:443 tfo
+        option tcplog
+        tcp-request inspect-delay 2s
+        # "TLS / ssl turn"
+        acl is_turn req_ssl_sni -i <b>myturndomain.somewhere.nu</b>
+        acl is_local src 127.0.0.1/8 <b>192.168.B.C</b>
+        acl is_ssl req_ssl_ver 1:4
+        tcp-request content accept if is_ssl
+        use_backend ssl-local if is_local is_ssl
+        use_backend turn if is_turn
+        default_backend ssl
+backend turn
+        mode tcp
+        server turn 127.0.0.1:5349
+backend ssl
+        mode tcp
+        server ssl 127.0.0.1:4444 send-proxy
+backend ssl-local
+        mode tcp
+        server ssl 127.0.0.1:4443
+</pre>
+note: adjust 192.168.b.c to the local ip adress of the host / vm. backend ssl-local is used in order to be able to bypass go-mmproxy in case traffic is sent from the host itself to https based webservices offered on the host itself.
