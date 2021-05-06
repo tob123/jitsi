@@ -100,7 +100,7 @@ jitsi_web_1        /init                            Up (healthy)   0.0.0.0:8289-
 
 ```
 # configure letsencrypt certificate for turn
-get renew_turn_cert.sh from  [sample](/sample/) to /usr/local/sbin/and make it executable
+get **renew_turn_cert.sh** from  [sample](/sample/) to /usr/local/sbin/and make it executable
 <pre>
 chmod 755 /usr/local/sbin/renew_turn_cert.sh
 root@debian10:/my_containers/jitsi# <b>certbot certonly -d myturndomain.somewhere.nu --deploy-hook /usr/local/sbin/renew_turn_cert.sh</b>
@@ -224,3 +224,9 @@ backend ssl-local
         server ssl 127.0.0.1:4443
 </pre>
 note: adjust 192.168.b.c to the local ip adress of the host / vm. backend ssl-local is used in order to be able to bypass go-mmproxy in case traffic is sent from the host itself to https based webservices offered on the host itself.
+check the config is valid and restart the service.
+<pre>
+root@debian10:/etc/haproxy# haproxy -c -f /etc/haproxy/haproxy.cfg 
+Configuration file is valid
+root@debian10:/etc/haproxy# systemctl restart haproxy.service 
+</pre>
