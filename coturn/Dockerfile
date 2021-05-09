@@ -1,5 +1,6 @@
 ARG REGISTRY
 FROM ${REGISTRY}/library/alpine:3.13
+ARG REGISTRY
 COPY rootfs /
 RUN apk add --no-cache \
     curl \

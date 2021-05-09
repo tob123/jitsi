@@ -58,6 +58,7 @@ services:
                     - jvb.meet.jitsi
     turn:
         image: ${MY_CONTAINER_REPO}tob123/jitsi-turn:stable
+        container_name: jitsi_turn_1
         restart: unless-stopped
         volumes:
             - /data/data1/dockervols/jitsi/coturn/certs:/etc/coturn/certs
