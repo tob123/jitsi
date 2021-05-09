@@ -5,3 +5,10 @@ CVE-2019-20149
 CVE-2020-8149
 CVE-2020-15168
 CVE-2020-7789
+#the below vulnerabilties were detected by trivy 0.17 (all jar files). before this version it was already in jitsi. as such the cve does not get worse by rebuilding the container. investigation is going on whether these cve's can be fixed
+CVE-2017-5645
+CVE-2020-27223
+CVE-2021-28165
+CVE-2021-28168
+CVE-2020-25649
+CVE-2020-28052
