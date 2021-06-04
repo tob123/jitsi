@@ -1,5 +1,6 @@
 #!/bin/bash
-export LOCAL_ADDRESS=`hostname -i`
+#export LOCAL_ADDRESS=`hostname -i`
+export LOCAL_ADDRESS=`getent hosts jvb.meet.jitsi | awk {'print $1'}`
 export MUC_NICKNAME=`uuidgen`
 if [[ -z $JVB_AUTH_PASSWORD ]]; then
     echo 'FATAL ERROR: JVB auth password must be set'

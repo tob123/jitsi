@@ -14,3 +14,6 @@ CVE-2020-25649
 CVE-2020-28052
 #the below vulnerability is in debian images. not exploitable remotely. https://github.com/debuerreotype/docker-debian-artifacts/issues/129#issuecomment-854205737
 CVE-2021-3520
+
+#ignore vulnerabilities for internal http client jicofo
+CVE-2020-13956
