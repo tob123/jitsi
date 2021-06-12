@@ -1,19 +1,2 @@
-#trivy detects some vulnerabilties due to outdated nodejs libraries
-#issue is there on github but no progress yet: https://github.com/jitsi/jitsi-meet/issues/8096
-CVE-2020-7788
-CVE-2019-20149
-CVE-2020-8149
-CVE-2020-15168
-CVE-2020-7789
-#the below vulnerabilties were detected by trivy 0.17 (all jar files). before this version it was already in jitsi. as such the cve does not get worse by rebuilding the container. investigation is going on whether these cve's can be fixed
-CVE-2017-5645
-CVE-2020-27223
-CVE-2021-28165
-CVE-2021-28168
-CVE-2020-25649
-CVE-2020-28052
-#the below vulnerability is in debian images. not exploitable remotely. https://github.com/debuerreotype/docker-debian-artifacts/issues/129#issuecomment-854205737
-CVE-2021-3520
-
 #ignore vulnerabilities for internal http client jicofo
 CVE-2020-13956
