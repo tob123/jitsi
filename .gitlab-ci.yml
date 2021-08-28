@@ -7,10 +7,13 @@ services:
     alias: docker
 .builder:
   stage: build
-  except:
-    changes:
-    - README.md
-    - sample
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+      when: always
+    - changes:
+      - README.md
+      - sample
+      when: never
   before_script:
     - docker info
     - |
