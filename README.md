@@ -229,4 +229,5 @@ check the config is valid and restart the service.
 root@debian10:/etc/haproxy# haproxy -c -f /etc/haproxy/haproxy.cfg 
 Configuration file is valid
 root@debian10:/etc/haproxy# systemctl restart haproxy.service 
+
 </pre>
