@@ -14,6 +14,8 @@ services:
       - README.md
       - sample
       when: never
+    - if: $CI_PIPELINE_SOURCE == "push"
+      when: always
   before_script:
     - docker info
     - |
