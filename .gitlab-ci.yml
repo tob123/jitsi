@@ -44,8 +44,6 @@ services:
     - bash ci_health.sh
     - docker ps -q -a --filter "exited=1"
     - docker ps -q -a --filter "status=exited"
-      #    - if [[ -n $(docker ps -q -a --filter "exited=1") ]];then echo "this built failed because not all containers started up";exit 1; fi
-      #    - if [[ -n $(docker ps -q -a --filter "status=exited") ]];then echo"found exited containers. this build fails"; exit 1; fi
     - docker container ls
     - docker-compose logs
     - echo "$REPO_HUB_P" | docker login $BUILD_REGISTRY -u "$REPO_HUB_U" --password-stdin
