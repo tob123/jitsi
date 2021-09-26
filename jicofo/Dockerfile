@@ -1,5 +1,5 @@
 ARG REGISTRY
-FROM ${REGISTRY}/library/debian:10-slim
+FROM ${REGISTRY}/library/debian:11-slim
 ARG JICOFO_DEB_VERSION=x.y.z
 COPY rootfs /
 RUN set -ex ; \
