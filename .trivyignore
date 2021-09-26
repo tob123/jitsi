@@ -1,4 +1,2 @@
-#ignore vulnerabilities for internal http client jicofo
-CVE-2020-13956
 #jetty vulnerability
 CVE-2021-28169
