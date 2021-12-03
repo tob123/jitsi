@@ -17,6 +17,15 @@ if [[ -n $CUSTOM_HEADER_SUBTITLE ]]; then
 find /usr/share/jitsi-meet/lang -name '*.json' | xargs sed -i 's/"headerSubtitle": "Secure [a-z ]*"/"headerSubtitle": "'"${CUSTOM_HEADER_SUBTITLE}"'"/'
 sed -i 's/"headerSubtitle":"Secure [a-z ]*"/"headerSubtitle":"'"${CUSTOM_HEADER_SUBTITLE}"'"/' /usr/share/jitsi-meet/libs/app.bundle.min.js
 fi
+if [[ -n $CUSTOM_HEADER_SUBTITLE_NL ]]; then
+find /usr/share/jitsi-meet/lang -name '*.json' | xargs sed -i 's/"headerSubtitle": "Veilige [a-z ]*"/"headerSubtitle": "'"${CUSTOM_HEADER_SUBTITLE_NL}"'"/'
+fi
+if [[ -n $CUSTOM_HEADER_SUBTITLE_DE ]]; then
+find /usr/share/jitsi-meet/lang -name '*.json' | xargs sed -i 's/"headerSubtitle": "Sichere [a-z ]*"/"headerSubtitle": "'"${CUSTOM_HEADER_SUBTITLE_DE}"'"/'
+fi
+if [[ -n $CUSTOM_HEADER_SUBTITLE_FR ]]; then
+find /usr/share/jitsi-meet/lang -name '*.json' | xargs sed -i 's/"headerSubtitle": "Conférences [a-z é]*"/"headerSubtitle": "'"${CUSTOM_HEADER_SUBTITLE_FR}"'"/'
+fi
 if [[ -n $CUSTOM_WM_LINK ]]; then
 sed -i "s#JITSI_WATERMARK_LINK: 'https://jitsi.org'#JITSI_WATERMARK_LINK: '${CUSTOM_WM_LINK}'#" $INTERFACE
 fi
