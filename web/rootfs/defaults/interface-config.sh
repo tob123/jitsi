@@ -14,8 +14,8 @@ find /usr/share/jitsi-meet/lang -name '*.json' | xargs sed -i 's/"headerTitle": 
 sed -i 's/"headerTitle":"Jitsi Meet"/"headerTitle":"'"${CUSTOM_HEADER_TITLE}"'"/' /usr/share/jitsi-meet/libs/app.bundle.min.js
 fi
 if [[ -n $CUSTOM_HEADER_SUBTITLE ]]; then
-find /usr/share/jitsi-meet/lang -name '*.json' | xargs sed -i 's/"headerSubtitle": "Jitsi Meet"/"headerSubtitle": "'"${CUSTOM_HEADER_SUBTITLE}"'"/'
-sed -i 's/"headerSubtitle":"Jitsi Meet"/"headerSubtitle":"'"${CUSTOM_HEADER_SUBTITLE}"'"/' /usr/share/jitsi-meet/libs/app.bundle.min.js
+find /usr/share/jitsi-meet/lang -name '*.json' | xargs sed -i 's/"headerSubtitle": "Secure [a-z ]*"/"headerSubtitle": "'"${CUSTOM_HEADER_SUBTITLE}"'"/'
+sed -i 's/"headerSubtitle":"Secure [a-z ]*"/"headerSubtitle":"'"${CUSTOM_HEADER_SUBTITLE}"'"/' /usr/share/jitsi-meet/libs/app.bundle.min.js
 fi
 if [[ -n $CUSTOM_WM_LINK ]]; then
 sed -i "s#JITSI_WATERMARK_LINK: 'https://jitsi.org'#JITSI_WATERMARK_LINK: '${CUSTOM_WM_LINK}'#" $INTERFACE
