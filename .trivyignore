@@ -1,2 +1,4 @@
 #jetty vulnerability
 CVE-2021-28169
+#cve dependency for jvb. gets fixed once debian-slim container image is updated to 11.2
+CVE-2021-43618
