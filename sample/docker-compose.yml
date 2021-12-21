@@ -7,6 +7,11 @@ services:
             - '${HTTP_PORT}:80'
         env_file:
             - ./.env_global
+        volumes:
+#            - /data/data1/dockervols/jitsi/web/customlayout:/usr/share/jitsi-meet/images/custom
+#            - /data/data1/dockervols/jitsi/web/customlayout/favicon.ico:/usr/share/jitsi-meet/images/favicon.ico
+#            - /data/data1/dockervols/jitsi/web/customlayout/welcome-background.png:/usr/share/jitsi-meet/images/welcome-background.png
+#            - /data/data1/dockervols/jitsi/web/customlayout/watermark-mobile.png:/usr/share/jitsi-meet/images/logo-deep-linking.png
         networks:
             meet.jitsi:
                 aliases:
