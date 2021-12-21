@@ -236,3 +236,45 @@ Configuration file is valid
 root@debian10:/etc/haproxy# systemctl restart haproxy.service 
 
 </pre>
+## branding
+The container image supports various options for branding that can be arranged using different methods:
+- by adding / replacing a file using a volume definition in docker-compose.yml
+- using an environment variable that is sourced during container startup by docker-compose
+
+
+| environment variable | filename | purpose | example value | original value or reference |
+| ------ | ------ | ------ |------ |------ |
+| CUSTOM_PAGE_TITLE | n.a. | Customize the browser tab title | Meet Appelo Solutions | Jitsi Meet |
+| CUSTOM_HEADER_TITLE | n.a. | Customize the title on the welcome page | Appelo Solutions | Jitsi Meet |
+| CUSTOM_HEADER_SUBTITLE | n.a. | Customize the subtitle on the welcome page | Secure and high quality meetings powered by Jitsi | Secure and high quality meetings |
+| CUSTOM_HEADER_SUBTITLE_NL | n.a. | Customize the subtitle on the welcome page with dutch language settings | Veilige vergaderingen van hoge kwaliteit met Jitsi | Veilige vergaderingen van hoge kwaliteit |
+| CUSTOM_HEADER_SUBTITLE_FR | n.a. | Customize the subtitle on the welcome page with french language settings | Conférences sécurisées et de haute qualité de Jitsi | Conférences sécurisées et de haute qualité |
+| CUSTOM_HEADER_SUBTITLE_DE | n.a. | Customize the subtitle on the welcome page with german language settings | Sichere und voll funktionale Videokonferenzen mit Jitsi | Sichere und hochqualitative Meetings |
+| CUSTOM_WM_LINK | n.a. | Customize the link of the logo on the welcome page | https://your.web.site | https://jitsi.org |
+| CUSTOM_LOGO_WELCOME | /usr/share/jitsi-meet/images/custom/watermark.svg | Customize the logo on the welcome page | 1 | [images/watermark.svg](https://github.com/jitsi/jitsi-meet/blob/master/images/watermark.svg) |
+| n.a. | /usr/share/jitsi-meet/images/favicon.ico | Customize the favicon | define volume in [docker-compose.yml](/sample/docker-compose.yml) | [images/favicon.ico](https://github.com/jitsi/jitsi-meet/blob/master/images/favicon.ico) |
+| n.a. | /usr/share/jitsi-meet/images/welcome-background.png | Customize the background on the welcome page | define volume in [docker-compose.yml](/sample/docker-compose.yml) | [images/welcome-background.png](https://github.com/jitsi/jitsi-meet/blob/master/images/welcome-background.png) |
+| n.a. | /usr/share/jitsi-meet/images/logo-deep-linking.png | Customize the logo on the mobile page before joining conference | define volume in [docker-compose.yml](/sample/docker-compose.yml) | [images/logo-deep-linking.png](https://github.com/jitsi/jitsi-meet/blob/master/images/logo-deep-linking.png) |
+| n.a. | /usr/share/jitsi-meet/plugin.head.html | Allows advanced adjustments using css code (parsed after jitsi's own css) | define volume in [docker-compose.yml](/sample/docker-compose.yml) | [plugin.head.html](https://github.com/jitsi/jitsi-meet/blob/master/plugin.head.html) |
+| n.a. | /usr/share/jitsi-meet/head.html | Allows advanced adjustments using css code (parsed before jitsi's own css) | define volume in [docker-compose.yml](/sample/docker-compose.yml) | [head.html](https://github.com/jitsi/jitsi-meet/blob/master/head.html) |
+
+example css adjustment by using plugin.head.html
+```
+<style>
+/*
+.welcome {
+  background-color: b8c7e0;
+}
+.welcome .header {
+    background-image: none;
+}
+.welcome .welcome-cards-container {
+    display: none;
+}
+*/
+</style>
+```
+
+
+Most of the above info is based on the following excellent site: https://scheible.it/das-design-von-jitsi-meet-anpassen/ 
+
