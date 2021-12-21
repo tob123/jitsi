@@ -71,8 +71,8 @@ All containers needed for jitsi are rebuilt on a daily basis using gitlab ci/cd:
 create a directory named "jitsi" for docker-compose and environment files and get them from here [sample](/sample/)
 the .env file contains some passwords. adjust the .env file or use genpw to create random passwords
 ```
-root@debian10:/my_containers/jitsi# sh genpw.sh
-root@debian10:/my_containers/jitsi# 
+root@debian11:/my_containers/jitsi# sh genpw.sh
+root@debian11:/my_containers/jitsi# 
 ```
 the .env_global contains a reference to your domain and the turn domain plus other variables.
 adjust the config so it includes your domains and activate turn:
@@ -90,8 +90,8 @@ ENABLE_TURN=1
 see below for other variables you might want to adjust
 bring up the containers and check they are healthy
 ```
-root@debian10:/my_containers/jitsi# docker-compose up -d
-root@debian10:/my_containers/jitsi# docker-compose ps
+root@debian11:/my_containers/jitsi# docker-compose up -d
+root@debian11:/my_containers/jitsi# docker-compose ps
 jitsi_jicofo_1     /usr/local/bin/entry.sh /u ...   Up (healthy)                                                           
 jitsi_jvb_1        /usr/local/bin/entry.sh /u ...   Up (healthy)   0.0.0.0:10000->10000/udp                                
 jitsi_prosody_1    /init                            Up (healthy)                                                           
@@ -173,11 +173,11 @@ server {
 </pre>
 activate the config
  ```
-root@debian10:/etc/nginx/sites-available# ln -s /etc/nginx/sites-available/jitsi.conf /etc/nginx/sites-enabled/jitsi.conf
-root@debian10:/etc/nginx/sites-available# nginx -t
+root@debian11:/etc/nginx/sites-available# ln -s /etc/nginx/sites-available/jitsi.conf /etc/nginx/sites-enabled/jitsi.conf
+root@debian11:/etc/nginx/sites-available# nginx -t
 nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
 nginx: configuration file /etc/nginx/nginx.conf test is successful
-root@debian10:/etc/nginx/sites-available# systemctl restart nginx.service 
+root@debian11:/etc/nginx/sites-available# systemctl restart nginx.service 
 ```
 afterwards run certbot, activate ceritifcate for your jitsi domain and restart nginx again.
 ```
@@ -185,18 +185,23 @@ certbot
 ...
 ```
 ## go-mmproxy
-go-mmproxy is in the debian bullseye release. get it by activating the repository for bullseye or just download / install it:
+
 ```
-root@debian10:# wget http://ftp.de.debian.org/debian/pool/main/g/go-mmproxy/go-mmproxy_2.0-1+b3_amd64.deb
-root@debian10:# dpkg -i go-mmproxy_2.0-1+b3_amd64.deb
+apt-get install go-mmproxy
 ```
 get go-mmproxy-ssl.service from [sample](/sample/) and save it in in directory /etc/systemd/system
 create a user and activate,enable the service
 ```
-root@debian10:/etc/systemd/system# adduser --system mmproxy
-root@debian10:/etc/systemd/system# systemctl enable go-mmproxy-ssl.service
-root@debian10:/etc/systemd/system# systemctl start go-mmproxy-ssl.service
+root@debian11:/etc/systemd/system# adduser --system mmproxy
+root@debian11:/etc/systemd/system# systemctl enable go-mmproxy-ssl.service
+root@debian11:/etc/systemd/system# systemctl start go-mmproxy-ssl.service
 ```
+If you are still on debian buster get mmproxy from bullseye release:
+```
+root@debian10:# wget http://ftp.de.debian.org/debian/pool/main/g/go-mmproxy/go-mmproxy_2.0-1+b3_amd64.deb
+root@debian10:# dpkg -i go-mmproxy_2.0-1+b3_amd64.deb
+```
+
 ## haproxy
 adjust haproxy config:
 <pre>
