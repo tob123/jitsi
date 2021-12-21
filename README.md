@@ -2,8 +2,8 @@
 github repo for jitsi customized container builts
 
 The code in this repository has been heavily based on the work of the jitsi team itself: https://github.com/jitsi/docker-jitsi-meet
-Goal of this repo is to have something in place for single host / vm deployments in a NAT environment to run jitsi self-hosted behind one public IP and offer max compatibility in terms of firewalling for participants and try to keep the amount of variables to configure small.
-At the same time this config allows run other webservices on the same host /vm.
+Goal of this repo is to have something in place for single host / vm deployments in a NAT environment to run jitsi self-hosted behind one public IP and offer max compatibility in terms of firewalling for participants and try to keep the amount of mandatory variables to configure small, but at the same time allows options for branding your jitsi setup.
+This config allows run other webservices on the same host /vm.
 If code from this repo could go to the original repo part of jitsi I would be all for it.
 A few things are added compared to the original docker jitsi setup:
 ## coturn server integration ##
