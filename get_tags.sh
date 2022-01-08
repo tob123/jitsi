@@ -1,7 +1,7 @@
 #!/bin/bash
 #set -x
 TAG_STRING=""
-TAG_STRING_STABLE="stable"
+TAG_STRING_STABLE="unstable"
 set_tag_mj () {
 for i in 2 3 4 5; do
   CONTAINER=CONTAINER_${i}

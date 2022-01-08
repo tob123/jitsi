@@ -7,6 +7,16 @@ ssl = {
         certificate = "/etc/prosody/certs/meet.jitsi.crt";
     }
 EOF
+if [[ $ENABLE_AUTH -eq 1 ]]; then
+  if [[ $JWT_AUTH -eq 1 ]]; then
+    cat <<EOF
+    authentication = "token"
+    app_id = "my_jitsi"
+    app_secret = "${JWT_APP_SECRET}"
+    allow_empty_token = false
+EOF
+  fi
+fi
 if [[ $ENABLE_AUTH -eq 0 ]]; then
   if [[ $DISABLE_XMPP_WEBSOCKET -eq 0 ]]; then
     cat <<EOF

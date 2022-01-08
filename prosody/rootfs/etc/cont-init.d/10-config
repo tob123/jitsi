@@ -2,6 +2,7 @@
 set -e
 /usr/local/bin/jitsi-configure-global.sh > /etc/prosody/global.cfg.lua
 /usr/local/bin/jitsi-configure.sh > /etc/prosody/conf.d/bla.meet.jitsi.cfg.lua
+/usr/local/bin/jitsi-configure-auth.sh > /etc/prosody/conf.d/jitsi_auth.cfg.lua
 chown root:prosody /etc/prosody/conf.d/bla.meet.jitsi.cfg.lua
 chown root:prosody /etc/prosody/global.cfg.lua
 chmod 640 /etc/prosody/conf.d/bla.meet.jitsi.cfg.lua
@@ -9,7 +10,7 @@ chmod 640 /etc/prosody/global.cfg.lua
 prosodyctl register $JVB_AUTH_USER auth.meet.jitsi $JVB_AUTH_PASSWORD
 prosodyctl register $JICOFO_AUTH_USER auth.meet.jitsi $JICOFO_AUTH_PASSWORD
 prosodyctl mod_roster_command subscribe focus.meet.jitsi focus@auth.meet.jitsi
-if [[ $ENABLE_AUTH -eq 1 ]]; then
+if [[ $ENABLE_AUTH -eq 1 && $JWT_AUTH -eq 0 ]]; then
 prosodyctl register ${AUTHORIZED_USER} meet.jitsi ${AUTHORIZED_USER_PASS}
 fi
 if [[ ! -f /var/lib/prosody/meet.jitsi.crt ]]; then
