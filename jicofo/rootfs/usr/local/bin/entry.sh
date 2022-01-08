@@ -10,6 +10,7 @@ else export JICOFO_AUTH=false
   if [[ $JWT_AUTH -eq 1 ]]; then
     export JICOFO_AUTH_TYPE=JWT
   else export JICOFO_AUTH_TYPE=XMPP
+  fi
 fi
 export DAEMON_OPTS="--domain=meet.jitsi --host=xmpp.meet.jitsi --user_name=focus --user_domain=auth.meet.jitsi --user_password=$JICOFO_AUTH_PASSWORD"
 exec "$@"
