@@ -56,7 +56,8 @@ RUN chmod +x /usr/local/bin/checkcontainer.sh
 #    chown -R jitsiadmin /etc/cont-init.d ; \
 #    chown -R jitsiadmin:prosody /etc/prosody
 ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2 \
-    PROSODY_LOG_LEVEL=info
+    PROSODY_LOG_LEVEL=info \
+    JWT_APP_ID=jitsi
 #USER jitsiadmin
 HEALTHCHECK CMD /usr/local/bin/checkcontainer.sh
 ENTRYPOINT [ "/init" ]

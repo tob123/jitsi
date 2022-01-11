@@ -11,7 +11,7 @@ if [[ $ENABLE_AUTH -eq 1 ]]; then
   if [[ $JWT_AUTH -eq 1 ]]; then
     cat <<EOF
     authentication = "token"
-    app_id = "my_jitsi"
+    app_id = "${JWT_APP_ID}"
     app_secret = "${JWT_APP_SECRET}"
     allow_empty_token = false
 EOF
@@ -83,30 +83,13 @@ EOF
   fi
 cat <<EOF
 }
-EOF
-  if [[ $DISABLE_XMPP_WEBSOCKET -eq 0 ]]; then
-    cat <<EOF
-    authentication = "token"
-    app_id = ""
-    app_secret = ""
-    allow_empty_token = true
-EOF
-  else 
-    cat <<EOF
-    authentication = "anonymous"
-EOF
-  fi
-  cat <<EOF
+    authentication = "jitsi-anonymous"
   main_muc = "muc.meet.jitsi";
   lobby_muc = "lobby.meet.jitsi";
   muc_lobby_whitelist = "recorder.meet.jitsi";
 EOF
 fi
 
-#if [[ -z $JICOFO_SECRET ]]; then
-#   1>&2 echo 'FATAL ERROR: Jicofo component secret and auth password must be set'
-#   exit 1
-#fi
 cat <<EOF
 Component "focus.meet.jitsi" "client_proxy"
     target_address = "focus@auth.meet.jitsi"
