@@ -276,5 +276,6 @@ example css adjustment by using plugin.head.html
 ```
 
 
-Most of the above info is based on the following excellent site: https://scheible.it/das-design-von-jitsi-meet-anpassen/ 
+Most of the branding info is based on the following nice site: https://scheible.it/das-design-von-jitsi-meet-anpassen/ 
+haproxy: https://gist.github.com/mhofman/a01df56480b3791d526b77dbebef43a2 
 
