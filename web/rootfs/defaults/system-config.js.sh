@@ -24,6 +24,7 @@ if [[ $DISABLE_PREJOIN_PAGE -eq 0 ]]; then
   cat <<EOF
 config.prejoinPageEnabled = true;
 EOF
+fi
 if [[ -n $TOKEN_AUTH_URL ]]; then
   cat <<EOF
 config.tokenAuthUrl = '${TOKEN_AUTH_URL}';
