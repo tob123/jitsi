@@ -128,7 +128,7 @@ get the nginx jitsi.conf to /etc/nginx/sites-available/jitsi.conf from  [sample]
   server {
     server_name <b>myjitsi.somewhere.nu</b>;
     access_log /var/log/nginx/$host.log;
-    location ^ /colibri-ws {
+    location /colibri-ws {
         proxy_pass http://localhost:8289/colibri-ws;
         proxy_http_version 1.1;
         proxy_set_header Connection "upgrade";
@@ -154,8 +154,8 @@ get the nginx jitsi.conf to /etc/nginx/sites-available/jitsi.conf from  [sample]
       gzip off;
     }
 
-    location = /xmpp-websocket {
-    proxy_pass http://localhost:8289/xmpp-websocket?$args;
+    location /xmpp-websocket {
+    proxy_pass http://localhost:8289;
     proxy_http_version 1.1;
     proxy_set_header Connection "Upgrade";
     proxy_set_header Upgrade $http_upgrade;
