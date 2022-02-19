@@ -29,12 +29,10 @@ RUN set -ex ; \
     chmod +x /usr/local/bin/entry.sh /usr/local/bin/remove_setuid.sh ; \
     /usr/local/bin/remove_setuid.sh
 ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2 \
-    JVB_ENABLE_APIS=rest,colibri
+    JVB_ENABLE_API=true
     
 USER jvb
 ENTRYPOINT [ "/usr/local/bin/entry.sh" ]
-
-#CMD [ "/usr/share/jitsi-videobridge/jvb.sh", "--apis=${JVB_ENABLE_APIS:='none'}" ]
 CMD [ "/usr/share/jitsi-videobridge/jvb.sh" ]
 HEALTHCHECK CMD curl -f localhost:8080/about/health || exit 1
 

@@ -12,10 +12,6 @@ DAEMON=/usr/share/jitsi-videobridge/jvb.sh
 export LOCAL_ADDRESS=`hostname -i`
 export MUC_NICKNAME=`uuidgen`
 
-#if [[ `whoami` = "root" ]]; then
-#  exec s6-setuidgid jvb /bin/bash -c "exec $DAEMON --apis=${JVB_ENABLE_APIS:="none"}"
-#  else /bin/bash -c "exec $DAEMON --apis=${JVB_ENABLE_APIS:="none"}"
-#fi
 export WS_DOMAIN=`echo $PUBLIC_URL | awk -F '/' {'print $3'}`
-exec "${@}" --apis=${JVB_ENABLE_APIS:='none'}
+exec "${@}"
 
