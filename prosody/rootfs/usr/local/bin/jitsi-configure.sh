@@ -18,18 +18,9 @@ EOF
   fi
 fi
 if [[ $ENABLE_AUTH -eq 0 ]]; then
-  if [[ $DISABLE_XMPP_WEBSOCKET -eq 0 ]]; then
     cat <<EOF
-    authentication = "token"
-    app_id = ""
-    app_secret = ""
-    allow_empty_token = true
+    authentication = "jitsi-anonymous"
 EOF
-  else 
-    cat <<EOF
-    authentication = "anonymous"
-EOF
-  fi
 fi
 cat <<EOF
 modules_enabled = {
@@ -50,19 +41,32 @@ if [[ $ENABLE_TURN -eq 1 ]]; then
       "external_services";
 EOF
 fi
-if [[ $ENABLE_AUTH -eq 0 ]]; then
+if [[ $ENABLE_LOBBY -eq 1 ]]; then
   cat <<EOF
       "muc_lobby_rooms";
+EOF
+fi
+if [[ $ENABLE_BREAKOUT_ROOMS -eq 1 ]]; then
+  cat <<EOF
+      "muc_breakout_rooms";
 EOF
 fi
 cat <<EOF
 }
 EOF
-if [[ $ENABLE_AUTH -eq 0 ]]; then
+cat <<EOF
+  main_muc = "muc.meet.jitsi"
+EOF
+
+if [[ $ENABLE_LOBBY -eq 1 ]]; then
   cat <<EOF
-  main_muc = "muc.meet.jitsi";
-  lobby_muc = "lobby.meet.jitsi";
-  muc_lobby_whitelist = "recorder.meet.jitsi";
+  muc_lobby_whitelist = "recorder.meet.jitsi"
+  lobby_muc = "lobby.meet.jitsi"
+EOF
+fi
+if [[ $ENABLE_BREAKOUT_ROOMS -eq 1 ]]; then
+  cat <<EOF
+  breakout_rooms_muc = "breakout.meet.jitsi"
 EOF
 fi
 cat <<EOF
@@ -73,25 +77,7 @@ EOF
 if [[ $ENABLE_AUTH -eq 1 ]]; then
   cat <<EOF
 VirtualHost "guest.meet.jitsi"
-    modules_enabled = {
-      "muc_lobby_rooms";
-EOF
-  if [[ $ENABLE_TURN -eq 1 ]]; then
-    cat <<EOF
-      "external_services";
-EOF
-  fi
-cat <<EOF
-}
     authentication = "jitsi-anonymous"
-  main_muc = "muc.meet.jitsi";
-  lobby_muc = "lobby.meet.jitsi";
-  muc_lobby_whitelist = "recorder.meet.jitsi";
 EOF
 fi
-
-cat <<EOF
-Component "focus.meet.jitsi" "client_proxy"
-    target_address = "focus@auth.meet.jitsi"
-EOF
 echo "--prosody virtualhost configuration options end"
