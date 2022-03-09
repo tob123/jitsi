@@ -1,5 +1,5 @@
 ARG REGISTRY
-FROM ${REGISTRY}/library/alpine:3.14
+FROM ${REGISTRY}/library/alpine:3.15
 ARG REGISTRY
 COPY rootfs /
 RUN apk add --no-cache \
