@@ -19,9 +19,9 @@ RUN set -ex; \
 #    curl https://download.jitsi.org/jitsi-key.gpg.key | gpg --dearmor > /etc/apt/trusted.gpg.d/jitsi-keyring.gpg ; \
     curl https://prosody.im/files/prosody-debian-packages.key | apt-key add - ; \
     echo deb http://packages.prosody.im/debian stable main | tee -a /etc/apt/sources.list ; \
-    apt-get update ; \
-    apt-get --no-install-recommends install -y  'prosody=0.11.9-2+deb11u2' ; \
-    apt-get --no-install-recommends install -y libssl1.1 \
+    apt-get update 
+RUN    apt-get --no-install-recommends install -y 'prosody=0.11.9-2+deb11u2'
+RUN    apt-get --no-install-recommends install -y libssl1.1 \
     sasl2-bin \
     libsasl2-modules-ldap \
     lua-basexx \
