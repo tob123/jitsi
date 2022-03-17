@@ -4,6 +4,7 @@ ARG JVB_DEB_VERSION=z.b.c
 COPY rootfs /
 RUN set -ex ; \
     apt-get update ; \
+    apt-get upgrade -y ; \
     apt-get --no-install-recommends install -y \
     curl \
     ca-certificates \
