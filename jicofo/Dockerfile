@@ -4,6 +4,7 @@ ARG JICOFO_DEB_VERSION=x.y.z
 COPY rootfs /
 RUN set -ex ; \
     apt-get update ; \
+    apt-get upgrade -y ; \
     apt-get --no-install-recommends install -y \
     curl \
     ca-certificates \
