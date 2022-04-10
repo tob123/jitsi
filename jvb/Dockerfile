@@ -18,7 +18,7 @@ RUN set -ex ; \
     apt-get remove --autoremove -y gnupg ; \
     apt-get clean ; \
     chmod +x /usr/local/bin/entry.sh /usr/local/bin/remove_setuid.sh ; \
-    /usr/local/bin/remove_setuid.sh
+    /usr/local/bin/remove_setuid.sh ; \
     rm -rf /var/cache/apt /var/lib/apt/lists/* \
     "/var/log/dpkg.log" \
     "/var/log/apt/term.log" \
@@ -28,7 +28,7 @@ RUN set -ex ; \
     "/var/log/alternatives.log" \
     "/etc/jitsi/videobridge/config" \
     "/etc/jitsi/videobridge/sip-communicator.properties" \
-    "/var/cache/debconf/passwords.dat" ; \
+    "/var/cache/debconf/passwords.dat" 
 ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2 \
     JVB_ENABLE_API=true
     
