@@ -1,4 +1,4 @@
-image: $BUILD_REGISTRY_PRD/proxy-cache/jdrouet/docker-with-buildx:stable
+image: $BUILD_REGISTRY_PRD/tob123/docker-buildx:20.10
 variables:
   DOCKER_TLS_CERTDIR: "/certs"
   CI_ENABLE_SHELL_TRACE: "true"
