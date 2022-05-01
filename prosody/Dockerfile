@@ -1,7 +1,7 @@
 ARG BUILD_REGISTRY_PRD
 ARG PROJECT
 ARG S6_VERSION
-FROM ${BUILD_REGISTRY_PRD}/proxy-cache/jitsi/prosody:stable-7001 as JITSI_PROSODY
+FROM ${BUILD_REGISTRY_PRD}/proxy-cache/jitsi/prosody:stable-7210-2 as JITSI_PROSODY
 ARG BUILD_REGISTRY_PRD
 ARG PROJECT
 ARG S6_VERSION
@@ -20,8 +20,11 @@ RUN set -ex; \
     curl https://prosody.im/files/prosody-debian-packages.key | apt-key add - ; \
     echo deb http://packages.prosody.im/debian stable main | tee -a /etc/apt/sources.list ; \
     apt-get update 
-RUN    apt-get --no-install-recommends install -y 'prosody=0.11.9-2+deb11u2'
-RUN    apt-get --no-install-recommends install -y libssl1.1 \
+RUN    apt-get --no-install-recommends install -y \
+    lua5.4 \
+    lua-unbound \
+    prosody \
+    libssl1.1 \
     sasl2-bin \
     libsasl2-modules-ldap \
     lua-basexx \

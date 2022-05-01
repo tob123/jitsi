@@ -4,10 +4,8 @@
 modules_disabled = {
         "s2s"; -- Handle server-to-server connections
 };
-daemonize = false
 pidfile = "/var/run/prosody/prosody.pid"
 c2s_require_encryption = false
-consider_bosh_secure = true
 --see also https://prosody.im/doc/network_backend
 --network_backend = "epoll"
 --plugin path for jitsi plugins for prosody
@@ -74,5 +72,8 @@ admins = {
         "focus@auth.meet.jitsi",
         "jvb@auth.meet.jitsi"
 }
+--httports and interfaces need to be defined for version 0.12
+http_ports = { 5280 }
+http_interfaces = { "*", "::" }
 Include "/etc/prosody/global.cfg.lua";
 Include "conf.d/*.cfg.lua"

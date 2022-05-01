@@ -1,2 +1,2 @@
 #!/usr/bin/with-contenv bash
-exec s6-setuidgid prosody prosody
+exec s6-setuidgid prosody prosody -F
