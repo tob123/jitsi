@@ -196,11 +196,6 @@ root@debian11:/etc/systemd/system# adduser --system mmproxy
 root@debian11:/etc/systemd/system# systemctl enable go-mmproxy-ssl.service
 root@debian11:/etc/systemd/system# systemctl start go-mmproxy-ssl.service
 ```
-If you are still on debian buster get mmproxy from bullseye release:
-```
-root@debian10:# wget http://ftp.de.debian.org/debian/pool/main/g/go-mmproxy/go-mmproxy_2.0-1+b3_amd64.deb
-root@debian10:# dpkg -i go-mmproxy_2.0-1+b3_amd64.deb
-```
 
 ## haproxy
 adjust haproxy config:
