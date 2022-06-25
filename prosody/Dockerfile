@@ -46,6 +46,9 @@ RUN    apt-get --no-install-recommends install -y \
     find /etc/ssl/certs -type l -exec rm {} \; ; \
     rm -rf  /var/cache/apt /var/lib/apt/lists/* \
     /etc/sasldb2 \
+    "/etc/prosody/certs/localhost.key" \
+    "/etc/prosody/certs/localhost.crt" \
+    "/etc/ssl/private/ssl-cert-snakeoil.key" \
     "/var/log/dpkg.log" \
     "/var/log/apt/*" \
     "/var/log/apt/term.log" \
