@@ -38,6 +38,9 @@ services:
         - JVB_AUTH_PASSWORD
         - JVB_AUTH_USER
         - TURN_PASSWORD
+        - JWT_AUTH
+        - JWT_APP_SECRET
+        - JWT_APP_ID
     networks:
         meet.jitsi:
             aliases:
@@ -54,6 +57,7 @@ services:
     environment:
         - JICOFO_AUTH_PASSWORD
         - JICOFO_AUTH_USER
+        - JWT_AUTH
     depends_on:
         - jitsi-prosody
     networks:
