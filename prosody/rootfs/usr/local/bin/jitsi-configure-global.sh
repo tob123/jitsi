@@ -3,7 +3,6 @@
 echo "----custom prosody global config options start----"
 if [[ $DISABLE_XMPP_WEBSOCKET -eq 0 ]]; then
 cat <<EOF
-access_control_allow_origins = { "${PUBLIC_URL}","https://meet.jitsi" };
 consider_websocket_secure = true;
 EOF
 fi

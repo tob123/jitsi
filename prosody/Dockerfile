@@ -1,14 +1,14 @@
 ARG BUILD_REGISTRY_PRD
 ARG PROJECT
 ARG S6_VERSION
-FROM ${BUILD_REGISTRY_PRD}/proxy-cache/jitsi/prosody:stable-7001 as JITSI_PROSODY
+#FROM ${BUILD_REGISTRY_PRD}/proxy-cache/jitsi/prosody:stable-7001 as JITSI_PROSODY
 ARG BUILD_REGISTRY_PRD
 ARG PROJECT
 ARG S6_VERSION
 FROM ${BUILD_REGISTRY_PRD}/${PROJECT}/s6-base:${S6_VERSION}
 ARG JITSI_VERSION_GITHUB=X.Y.Z
-COPY --from=JITSI_PROSODY /usr/local/lib/lua /usr/local/lib/lua
-COPY --from=JITSI_PROSODY /usr/local/share/lua /usr/local/share/lua
+#COPY --from=JITSI_PROSODY /usr/local/lib/lua /usr/local/lib/lua
+#COPY --from=JITSI_PROSODY /usr/local/share/lua /usr/local/share/lua
 RUN set -ex; \
     apt-get update ; \
     apt-get --no-install-recommends install -y \
@@ -21,7 +21,7 @@ RUN set -ex; \
     echo deb http://packages.prosody.im/debian stable main | tee -a /etc/apt/sources.list ; \
     apt-get update 
 RUN    apt-get --no-install-recommends install -y \
-    lua5.4 \
+    lua5.2 \
     lua-unbound \
     prosody \
     libssl1.1 \
