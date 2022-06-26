@@ -23,6 +23,8 @@ RUN set -ex; \
 RUN    apt-get --no-install-recommends install -y \
     lua5.2 \
     lua-unbound \
+    lua-cjson \
+    lua-luaossl \
     prosody \
     libssl1.1 \
     sasl2-bin \
