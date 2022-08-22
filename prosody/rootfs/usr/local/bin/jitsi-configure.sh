@@ -14,6 +14,7 @@ if [[ $ENABLE_AUTH -eq 1 ]]; then
     app_id = "${JWT_APP_ID}"
     app_secret = "${JWT_APP_SECRET}"
     allow_empty_token = false
+    enable_domain_verification = false
 EOF
   fi
 fi
