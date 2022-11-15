@@ -41,5 +41,6 @@ ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2
 USER jicofo
 
 ENTRYPOINT [ "/usr/local/bin/entry.sh" ]
-CMD [ "/usr/share/jicofo/jicofo.sh", "--domain=meet.jitsi", "--host=xmpp.meet.jitsi", "--user_name=focus", "--user_domain=auth.meet.jitsi" ]
+#CMD [ "/usr/share/jicofo/jicofo.sh", "--domain=meet.jitsi", "--host=xmpp.meet.jitsi", "--user_name=focus", "--user_domain=auth.meet.jitsi" ]
+CMD [ "/usr/share/jicofo/jicofo.sh" ]
 HEALTHCHECK CMD curl -f http://localhost:8888/about/health || exit 1
