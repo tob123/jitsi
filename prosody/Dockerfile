@@ -34,7 +34,7 @@ RUN    apt-get --no-install-recommends install -y \
     lua-sec ; \
     mkdir -p /jitsi/prosody-plugins ; \
     cd /jitsi/prosody-plugins ; \
-    curl -L --output - https://github.com/jitsi/jitsi-meet/archive/stable/jitsi-meet_${JITSI_VERSION_GITHUB}.tar.gz | tar zxf - --wildcards "*/resources/prosody-plugins" --strip-components=3 ;\
+    curl -L --output - https://github.com/jitsi/jitsi-meet/archive/oldstable/jitsi-meet_${JITSI_VERSION_GITHUB}.tar.gz | tar zxf - --wildcards "*/resources/prosody-plugins" --strip-components=3 ;\
     mkdir /etc/prosody/conf.d ; \
     ln -s /var/lib/prosody/auth.meet.jitsi.crt /etc/prosody/certs/auth.meet.jitsi.crt ; \
     ln -s /var/lib/prosody/auth.meet.jitsi.key /etc/prosody/certs/auth.meet.jitsi.key ; \
