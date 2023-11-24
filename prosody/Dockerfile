@@ -1,14 +1,14 @@
 ARG BUILD_REGISTRY_PRD
 ARG PROJECT
 ARG S6_VERSION
-#FROM ${BUILD_REGISTRY_PRD}/proxy-cache/jitsi/prosody:stable-7001 as JITSI_PROSODY
+FROM ${BUILD_REGISTRY_PRD}/proxy-cache/jitsi/prosody:stable as JITSI_PROSODY
 ARG BUILD_REGISTRY_PRD
 ARG PROJECT
 ARG S6_VERSION
 FROM ${BUILD_REGISTRY_PRD}/${PROJECT}/s6-base:${S6_VERSION}
 ARG JITSI_VERSION_GITHUB=X.Y.Z
-#COPY --from=JITSI_PROSODY /usr/local/lib/lua /usr/local/lib/lua
-#COPY --from=JITSI_PROSODY /usr/local/share/lua /usr/local/share/lua
+COPY --from=JITSI_PROSODY /usr/local/lib/lua/5.4 /usr/local/lib/lua/5.4
+COPY --from=JITSI_PROSODY /usr/local/share/lua/5.4 /usr/local/share/lua/5.4
 RUN set -ex; \
     apt-get update ; \
     apt-get --no-install-recommends install -y \
@@ -21,16 +21,17 @@ RUN set -ex; \
     echo deb http://packages.prosody.im/debian oldstable main | tee -a /etc/apt/sources.list ; \
     apt-get update 
 RUN    apt-get --no-install-recommends install -y \
-    lua5.2 \
+    lua5.4 \
     lua-unbound \
-    lua-cjson \
+#    lua-cjson \
     lua-luaossl \
     prosody \
     libssl1.1 \
     sasl2-bin \
     libsasl2-modules-ldap \
-    lua-basexx \
+#    lua-basexx \
     lua-ldap \
+    lua-inspect \
     lua-sec ; \
     mkdir -p /jitsi/prosody-plugins ; \
     cd /jitsi/prosody-plugins ; \
@@ -40,6 +41,7 @@ RUN    apt-get --no-install-recommends install -y \
     ln -s /var/lib/prosody/auth.meet.jitsi.key /etc/prosody/certs/auth.meet.jitsi.key ; \
     ln -s /var/lib/prosody/meet.jitsi.crt /etc/prosody/certs/meet.jitsi.crt ; \
     ln -s /var/lib/prosody/meet.jitsi.key /etc/prosody/certs/meet.jitsi.key ; \
+    mv /usr/share/lua/5.3/inspect.lua /usr/share/lua/5.4/ ; \
     mkdir /var/run/prosody ; \
     chown -R prosody:prosody /etc/prosody/certs /var/run/prosody ; \
     chmod 700 /etc/prosody/certs ; \
