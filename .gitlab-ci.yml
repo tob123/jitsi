@@ -58,4 +58,4 @@ build-job-1:
   parallel:
     matrix:
       - VERSION: LATEST
-        S6_VERSION: ["2.2"]
+        S6_VERSION: ["3.2.0.0"]
