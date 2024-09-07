@@ -1,5 +1,5 @@
 ARG REGISTRY
-FROM ${REGISTRY}/library/debian:11-slim
+FROM ${REGISTRY}/library/debian:12-slim
 ARG JVB_DEB_VERSION=z.b.c
 COPY rootfs /
 RUN set -ex ; \
