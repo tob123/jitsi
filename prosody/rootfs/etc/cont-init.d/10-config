@@ -1,4 +1,4 @@
-#!/usr/bin/with-contenv bash
+#!/command/with-contenv bash
 set -e
 /usr/local/bin/jitsi-configure-global.sh > /etc/prosody/global.cfg.lua
 /usr/local/bin/jitsi-configure.sh > /etc/prosody/conf.d/bla.meet.jitsi.cfg.lua

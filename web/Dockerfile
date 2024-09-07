@@ -23,6 +23,7 @@ RUN set -ex; \
     # test with up2date npm based packages
 #    apt-get remove -y --autoremove jitsi-meet-web; \
 #    dpkg -i /root/jitsi-meet-web*;\
+    chmod +x /etc/cont-init.d/10-config ; \
     apt-get remove -y --autoremove ca-certificates gnupg ; \
     apt-get clean ; \
 	rm -rf /tmp/pkg /var/cache/apt /var/lib/apt/lists/* \
@@ -34,6 +35,7 @@ RUN set -ex; \
 #    adduser --shell /bin/bash --gecos 'admin user' --uid 2000 --disabled-password jitsiadmin ; \
 #    chown -R jitsiadmin /etc/cont-init.d ; \
 #    chown -R jitsiadmin:prosody /etc/prosody
-ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2
+#ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2
+
 ENTRYPOINT [ "/init" ]
 HEALTHCHECK CMD curl -f http://localhost | grep jitsi || exit 1

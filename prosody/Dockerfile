@@ -18,15 +18,16 @@ RUN set -ex; \
     gpg ; \
 #    curl https://download.jitsi.org/jitsi-key.gpg.key | gpg --dearmor > /etc/apt/trusted.gpg.d/jitsi-keyring.gpg ; \
     curl https://prosody.im/files/prosody-debian-packages.key | apt-key add - ; \
-    echo deb http://packages.prosody.im/debian oldstable main | tee -a /etc/apt/sources.list ; \
+    echo deb http://packages.prosody.im/debian stable main | tee -a /etc/apt/sources.list ; \
     apt-get update 
-RUN    apt-get --no-install-recommends install -y \
+RUN set -ex; \
+    apt-get --no-install-recommends install -y \
     lua5.4 \
     lua-unbound \
 #    lua-cjson \
     lua-luaossl \
     prosody \
-    libssl1.1 \
+    libssl3 \
     sasl2-bin \
     libsasl2-modules-ldap \
 #    lua-basexx \
@@ -60,7 +61,7 @@ RUN    apt-get --no-install-recommends install -y \
     "/var/cache/ldconfig/aux-cache" \
     "/var/log/alternatives.log"
 COPY rootfs /
-RUN chmod +x /usr/local/bin/checkcontainer.sh
+RUN chmod +x /usr/local/bin/checkcontainer.sh /etc/cont-init.d/10-config
 #    adduser --shell /bin/bash --gecos 'admin user' --uid 2000 --disabled-password jitsiadmin ; \
 #    chown -R jitsiadmin /etc/cont-init.d ; \
 #    chown -R jitsiadmin:prosody /etc/prosody
