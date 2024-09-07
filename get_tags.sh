@@ -62,6 +62,6 @@ until [[ -z "$MAJOR_TAG"  ]];do
   fi
 done
 set_tag_min
-set_tag_dev
-set_tag_dev_turn
+set_tag_stable
+set_tag_stable_turn
 export TAG_STRING
