@@ -2,6 +2,7 @@
 #set -x
 TAG_STRING=""
 TAG_STRING_STABLE="stable"
+TAG_STRING_STABLE="dev"
 set_tag_mj () {
 for i in 2 3 4 5; do
   CONTAINER=CONTAINER_${i}
@@ -30,6 +31,15 @@ for i in 2 3 4 5; do
   TAG_STRING="$TAG_STRING $TAG_STRING_ADD"
 done
 }
+set_tag_dev () {
+for i in 2 3 4 5; do
+  CONTAINER=CONTAINER_${i}
+  CONT_IMAGE_BASE="${BUILD_REGISTRY}/${PROJECT}/${!CONTAINER}"
+  CONT_IMAGE="${BUILD_REGISTRY}/${PROJECT}/${!CONTAINER}:${TAG_STRING_DEV}"
+  TAG_STRING_ADD="--set ${!CONTAINER}.tags=${CONT_IMAGE}"
+  TAG_STRING="$TAG_STRING $TAG_STRING_ADD"
+done
+}
 set_tag_stable_turn () {
   CONTAINER="CONTAINER_6"
   CONT_IMAGE="${BUILD_REGISTRY}/${PROJECT}/${!CONTAINER}"
@@ -46,6 +56,6 @@ until [[ -z "$MAJOR_TAG"  ]];do
   fi
 done
 set_tag_min
-set_tag_stable
+set_tag_dev
 set_tag_stable_turn
 export TAG_STRING
