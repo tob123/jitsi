@@ -46,6 +46,12 @@ set_tag_stable_turn () {
   TAG_STRING_ADD="--set ${!CONTAINER}.tags=${CONT_IMAGE}:${COTURN_VERSION} --set ${!CONTAINER}.tags=${CONT_IMAGE}:${TAG_STRING_STABLE}"
   TAG_STRING="$TAG_STRING $TAG_STRING_ADD"
 }
+set_tag_dev_turn () {
+  CONTAINER="CONTAINER_6"
+  CONT_IMAGE="${BUILD_REGISTRY}/${PROJECT}/${!CONTAINER}"
+  TAG_STRING_ADD="--set ${!CONTAINER}.tags=${CONT_IMAGE}:${COTURN_VERSION} --set ${!CONTAINER}.tags=${CONT_IMAGE}:${TAG_STRING_DEV}"
+  TAG_STRING="$TAG_STRING $TAG_STRING_ADD"
+}
 MAJOR_TAG=$JITSI_VERSION
 until [[ -z "$MAJOR_TAG"  ]];do
   if MAJOR_TAG=`echo $MAJOR_TAG | sed 's/\.[0-9]*$//'`;then
@@ -57,5 +63,5 @@ until [[ -z "$MAJOR_TAG"  ]];do
 done
 set_tag_min
 set_tag_dev
-set_tag_stable_turn
+set_tag_dev_turn
 export TAG_STRING
