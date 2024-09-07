@@ -48,7 +48,7 @@ services:
     - docker-compose logs
     - echo "$REPO_HUB_P" | docker login $BUILD_REGISTRY -u "$REPO_HUB_U" --password-stdin
     - docker-compose logs
-    - bash compare.sh
+#    - bash compare.sh
     - bash scan.sh
     - bash push.sh
 build-job-1:

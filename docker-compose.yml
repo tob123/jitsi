@@ -83,7 +83,7 @@ services:
             aliases:
                 - jvb.meet.jitsi
   jitsi-turn:
-    image: ${BUILD_REGISTRY}/${PROJECT}/${CONTAINER_6}:${COTURN_VERSION}
+    image: ${BUILD_REGISTRY}/${PROJECT}/${CONTAINER_6}:4.6.2
     build: 
       context: ./coturn
       args:
