@@ -1,4 +1,4 @@
-image: $BUILD_REGISTRY_PRD/library/docker:20.10
+image: $BUILD_REGISTRY_PRD/proxy-cache/library/docker:20.10
 variables:
   DOCKER_TLS_CERTDIR: "/certs"
   CI_ENABLE_SHELL_TRACE: "true"
