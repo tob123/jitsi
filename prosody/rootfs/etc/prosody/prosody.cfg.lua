@@ -72,6 +72,8 @@ admins = {
         "focus@auth.meet.jitsi",
         "jvb@auth.meet.jitsi"
 }
+component_admins_as_room_owners = true
+
 --httports and interfaces need to be defined for version 0.12
 http_ports = { 5280 }
 http_interfaces = { "*", "::" }

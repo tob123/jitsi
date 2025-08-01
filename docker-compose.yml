@@ -75,6 +75,7 @@ services:
         - ./.env_global
     environment:
         - JVB_AUTH_USER
+        - JVB_API_ENABLE
         - JVB_AUTH_PASSWORD
     depends_on:
         - jitsi-prosody

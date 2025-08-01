@@ -26,7 +26,7 @@ RUN set -ex; \
     lua-unbound \
 #    lua-cjson \
     lua-luaossl \
-    prosody-0.12 \
+    prosody \
     libssl3 \
     sasl2-bin \
     libsasl2-modules-ldap \

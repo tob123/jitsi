@@ -52,6 +52,11 @@ if [[ $ENABLE_BREAKOUT_ROOMS -eq 1 ]]; then
       "muc_breakout_rooms";
 EOF
 fi
+if [[ $ENABLE_AUTH -eq 1 && $JWT_AUTH -eq 1 ]]; then
+  cat <<EOF
+    "token_verification";
+EOF
+fi
 cat <<EOF
 }
 EOF
