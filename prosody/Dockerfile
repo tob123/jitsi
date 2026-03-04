@@ -12,15 +12,13 @@ COPY --from=JITSI_PROSODY /usr/local/share/lua/5.4 /usr/local/share/lua/5.4
 RUN set -ex; \
     apt-get update ; \
     apt-get --no-install-recommends install -y \
+    wget \
     curl \
     ca-certificates \
     gpg-agent \
     gpg ; \
-    curl https://prosody.im/files/prosody-debian-packages.key \
-      | gpg --dearmor \
-      | tee /etc/apt/keyrings/prosody.gpg > /dev/null ; \
-    echo "deb [signed-by=/etc/apt/keyrings/prosody.gpg] http://packages.prosody.im/debian stable main" | tee -a /etc/apt/sources.list ; \
-    apt-get update 
+    wget https://prosody.im/downloads/repos/bookworm/prosody.sources -O/etc/apt/sources.list.d/prosody.sources ; \
+    apt-get update
 RUN set -ex; \
     apt-get --no-install-recommends install -y \
     lua5.4 \
@@ -47,7 +45,7 @@ RUN set -ex; \
     mkdir /var/run/prosody ; \
     chown -R prosody:prosody /etc/prosody/certs /var/run/prosody ; \
     chmod 700 /etc/prosody/certs ; \
-    apt-get remove --autoremove -y gpg gpg-agent ca-certificates ; \
+    apt-get remove --autoremove -y gpg gpg-agent ca-certificates wget ; \
     apt-get clean ; \
     find /etc/ssl/certs -type l -exec rm {} \; ; \
     rm -rf  /var/cache/apt /var/lib/apt/lists/* \
