@@ -1,9 +1,11 @@
-image: $BUILD_REGISTRY_PRD/proxy-cache/library/docker:20.10
+image: $BUILD_REGISTRY_PRD/proxy-cache/docker:26-cli
 variables:
-  DOCKER_TLS_CERTDIR: "/certs"
-  CI_ENABLE_SHELL_TRACE: "true"
+    DOCKER_HOST: tcp://docker:2376
+    DOCKER_TLS_CERTDIR: "/certs"
+    DOCKER_TLS_VERIFY: 1
+    DOCKER_CERT_PATH: "$DOCKER_TLS_CERTDIR/client"
 services:
-  - name: $BUILD_REGISTRY_PRD/proxy-cache/library/docker:20.10-dind
+  - name: $BUILD_REGISTRY_PRD/proxy-cache/docker:26-dind
     alias: docker
 .builder:
   stage: build
@@ -20,7 +22,6 @@ services:
     - docker info
     - |
       apk add \
-      docker-compose \
       openssl \
       curl \
       jq \
@@ -31,13 +32,12 @@ services:
     - mv container-diff-linux-amd64 /usr/local/bin/container-diff
   script:
     - docker --version
-    - docker-compose --version
     - source buildenvironment
     - source get_versions.sh
     - source set_versions.sh
     - bash pull.sh
-    - docker-compose build
-    - docker-compose up -d
+    - docker compose build
+    - docker compose up -d
     - docker ps -q --filter health=starting --filter health=unhealthy --filter health=none
     - bash ci_health.sh
     - docker ps -q -a --filter "exited=1"
@@ -51,7 +51,7 @@ services:
     - bash push.sh
 build-job-1:
   tags:
-    - debwithdock
+    - rootless_docker_privileged
   extends: .builder
   parallel:
     matrix:

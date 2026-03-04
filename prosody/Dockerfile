@@ -16,9 +16,10 @@ RUN set -ex; \
     ca-certificates \
     gpg-agent \
     gpg ; \
-#    curl https://download.jitsi.org/jitsi-key.gpg.key | gpg --dearmor > /etc/apt/trusted.gpg.d/jitsi-keyring.gpg ; \
-    curl https://prosody.im/files/prosody-debian-packages.key | apt-key add - ; \
-    echo deb http://packages.prosody.im/debian stable main | tee -a /etc/apt/sources.list ; \
+    curl https://prosody.im/files/prosody-debian-packages.key \
+      | gpg --dearmor \
+      | tee /etc/apt/keyrings/prosody.gpg > /dev/null ; \
+    echo "deb [signed-by=/etc/apt/keyrings/prosody.gpg] http://packages.prosody.im/debian stable main" | tee -a /etc/apt/sources.list ; \
     apt-get update 
 RUN set -ex; \
     apt-get --no-install-recommends install -y \
