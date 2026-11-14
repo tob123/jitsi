@@ -17,7 +17,7 @@ RUN set -ex; \
     ca-certificates \
     gpg-agent \
     gpg ; \
-    wget https://prosody.im/downloads/repos/bookworm/prosody.sources -O/etc/apt/sources.list.d/prosody.sources ; \
+    wget https://prosody.im/downloads/repos/trixie/prosody.sources -O/etc/apt/sources.list.d/prosody.sources ; \
     apt-get update
 RUN set -ex; \
     apt-get --no-install-recommends install -y \
