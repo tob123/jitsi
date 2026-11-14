@@ -82,27 +82,27 @@ services:
         meet.jitsi:
             aliases:
                 - jvb.meet.jitsi
-  jitsi-turn:
-    image: ${BUILD_REGISTRY}/${PROJECT}/${CONTAINER_6}:${COTURN_VERSION}
-    build: 
-      context: ./coturn
-      args:
-        REGISTRY: ${REGISTRY}
-    volumes:
-        - /data/data1/dockervols/jitsi/coturn/certs:/etc/coturn/certs
-    ports:
-        - '3478:3478/udp'
-        - '5349:5349'
-    env_file:
-        - ./.env_global
-    environment:
-        - TURN_PASSWORD
-    depends_on:
-        - jitsi-prosody
-        - jitsi-jvb
-    networks:
-        meet.jitsi:
-            aliases:
-                - meet.jitsi
+#  jitsi-turn:
+#    image: ${BUILD_REGISTRY}/${PROJECT}/${CONTAINER_6}:${COTURN_VERSION}
+#    build:
+#      context: ./coturn
+#      args:
+#        REGISTRY: ${REGISTRY}
+#    volumes:
+#        - /data/data1/dockervols/jitsi/coturn/certs:/etc/coturn/certs
+#    ports:
+#        - '3478:3478/udp'
+#        - '5349:5349'
+#    env_file:
+#        - ./.env_global
+#    environment:
+#        - TURN_PASSWORD
+#    depends_on:
+#        - jitsi-prosody
+#        - jitsi-jvb
+#    networks:
+#        meet.jitsi:
+#            aliases:
+#                - meet.jitsi
 networks:
     meet.jitsi:
