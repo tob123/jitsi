@@ -1,11 +1,11 @@
-image: $BUILD_REGISTRY_PRD/proxy-cache/docker:26-cli
+image: $BUILD_REGISTRY_PRD/proxy-cache/docker:29-cli
 variables:
     DOCKER_HOST: tcp://docker:2376
     DOCKER_TLS_CERTDIR: "/certs"
     DOCKER_TLS_VERIFY: 1
     DOCKER_CERT_PATH: "$DOCKER_TLS_CERTDIR/client"
 services:
-  - name: $BUILD_REGISTRY_PRD/proxy-cache/docker:26-dind
+  - name: $BUILD_REGISTRY_PRD/proxy-cache/docker:29-dind
     alias: docker
 .builder:
   stage: build
@@ -20,6 +20,7 @@ services:
       when: always
   before_script:
     - docker info
+    - sed -i 's|https://dl-cdn|http://192.168.1.4:3142/dl-cdn|' /etc/apk/repositories
     - |
       apk add \
       openssl \
