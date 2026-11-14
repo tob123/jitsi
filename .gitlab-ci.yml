@@ -26,7 +26,6 @@ services:
       openssl \
       curl \
       jq \
-
       bash
     - curl -x http://vondelaar.appelo.org:3128 --cacert ca.crt -L -o diffoci https://github.com/reproducible-containers/diffoci/releases/download/v0.1.8/diffoci-v0.1.8.linux-amd64
     - chmod +x diffoci
