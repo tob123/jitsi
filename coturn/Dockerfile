@@ -3,6 +3,7 @@ FROM ${REGISTRY}/library/alpine:3.24
 ARG REGISTRY
 COPY rootfs /
 RUN sed -i 's|https://dl-cdn|http://192.168.1.4:3142/dl-cdn|' /etc/apk/repositories ; \
+    apk --no-cache upgrade ; \
     apk add --no-cache \
     curl \
     coturn ; \
