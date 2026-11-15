@@ -2,7 +2,8 @@ ARG REGISTRY
 FROM ${REGISTRY}/library/alpine:3.24
 ARG REGISTRY
 COPY rootfs /
-RUN apk add --no-cache \
+RUN sed -i 's|https://dl-cdn|http://192.168.1.4:3142/dl-cdn|' /etc/apk/repositories ; \
+    apk add --no-cache \
     curl \
     coturn ; \
     chmod +x /usr/local/bin/entry.sh \
