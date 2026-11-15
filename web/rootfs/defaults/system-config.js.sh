@@ -30,3 +30,8 @@ if [[ -n $TOKEN_AUTH_URL ]]; then
 config.tokenAuthUrl = '${TOKEN_AUTH_URL}';
 EOF
 fi
+if [[ $ENABLE_STUN_PRIVATE -eq 1 ]]; then
+  cat <<EOF
+config.p2p.stunServers = [{ urls: 'stun:${TURN_DOMAIN}:3478' }];
+EOF
+fi
