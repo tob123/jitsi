@@ -1,5 +1,5 @@
 ARG REGISTRY
-FROM ${REGISTRY}/library/alpine:3.23
+FROM ${REGISTRY}/library/alpine:3.24
 ARG REGISTRY
 COPY rootfs /
 RUN apk add --no-cache \
@@ -14,7 +14,7 @@ USER turnserver
 ENTRYPOINT ["entry.sh"]
 
 CMD ["--log-file=stdout", "--external-ip=$(detect-external-ip.sh)", "--allowed-peer-ip=$XMPP_SERVER_IP", "--allowed-peer-ip=$JVB_SERVER_IP", "--allowed-peer-ip=$TURN_SERVER_IP", "-c ${TURN_CONFIG}", "-r $TURN_DOMAIN", "--listening-ip=$TURN_SERVER_IP"]
-HEALTHCHECK CMD /usr/local/bin/containercheck.sh 
+HEALTHCHECK CMD /usr/local/bin/containercheck.sh
 
 EXPOSE 3478 3478/udp 5349
 

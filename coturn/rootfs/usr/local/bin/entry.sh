@@ -6,13 +6,16 @@ set -e
 export XMPP_SERVER_IP=`getent hosts xmpp.meet.jitsi | awk '{print $1}'`
 export JVB_SERVER_IP=`getent hosts jvb.meet.jitsi | awk '{print $1}'`
 export TURN_SERVER_IP=`hostname -i`
-turnadmin -s ${TURN_PASSWORD} -r ${TURN_DOMAIN}
-if [ $TURN_VERBOSE -eq 1 ]; then
-  export TURN_CONFIG="/etc/coturn/turnserver-verbose.conf"
+if [ $ENABLE_TURN -eq 1 ]; then
+  turnadmin -s ${TURN_PASSWORD} -r ${TURN_DOMAIN}
+  if [ $TURN_VERBOSE -eq 1 ]; then
+    export TURN_CONFIG="/etc/coturn/turnserver-verbose.conf"
+  else
+    export TURN_CONFIG="/etc/coturn/turnserver-active.conf"
+  fi
 else
-  export TURN_CONFIG="/etc/coturn/turnserver.conf"
+  TURN_CONFIG="/etc/coturn/stunonly.conf"
 fi
-
 if [ "${1:0:1}" == '-' ]; then
   set -- turnserver "$@"
 fi
