@@ -9,8 +9,8 @@ RUN set -ex ; \
     curl \
     ca-certificates \
     gnupg ; \
-    curl https://download.jitsi.org/jitsi-key.gpg.key | gpg --dearmor > /etc/apt/trusted.gpg.d/jitsi-keyring.gpg ; \
-    echo 'deb [signed-by=/etc/apt/trusted.gpg.d/jitsi-keyring.gpg] https://download.jitsi.org stable/' | tee /etc/apt/sources.list.d/jitsi-stable.list ; \
+    cat jitsi-key.gpg.key | gpg --dearmor > /etc/apt/trusted.gpg.d/jitsi-keyring.gpg ; \
+    echo 'deb [signed-by=/etc/apt/trusted.gpg.d/jitsi-keyring.gpg] http://download.jitsi.org stable/' | tee /etc/apt/sources.list.d/jitsi-stable.list ; \
     mkdir -p /usr/share/man/man1 ; \
     apt-get update ; \
     apt-get --no-install-recommends install -y \

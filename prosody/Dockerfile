@@ -9,7 +9,10 @@ FROM ${BUILD_REGISTRY_PRD}/${PROJECT}/s6-base:${S6_VERSION}
 ARG JITSI_VERSION_GITHUB=X.Y.Z
 COPY --from=JITSI_PROSODY /usr/local/lib/lua/5.4 /usr/local/lib/lua/5.4
 COPY --from=JITSI_PROSODY /usr/local/share/lua/5.4 /usr/local/share/lua/5.4
+COPY rootfs/etc/apt/sources.list.d /etc/apt/sources.list.d
+COPY rootfs/ca.crt /ca.crt
 RUN set -ex; \
+    ls /etc/apt/sources.list.d ; \
     apt-get update ; \
     apt-get --no-install-recommends install -y \
     wget \
@@ -17,7 +20,6 @@ RUN set -ex; \
     ca-certificates \
     gpg-agent \
     gpg ; \
-    wget https://prosody.im/downloads/repos/trixie/prosody.sources -O/etc/apt/sources.list.d/prosody.sources ; \
     apt-get update
 RUN set -ex; \
     apt-get --no-install-recommends install -y \
@@ -35,7 +37,7 @@ RUN set -ex; \
     lua-sec ; \
     mkdir -p /jitsi/prosody-plugins ; \
     cd /jitsi/prosody-plugins ; \
-    curl -L --output - https://github.com/jitsi/jitsi-meet/archive/stable/jitsi-meet_${JITSI_VERSION_GITHUB}.tar.gz | tar zxf - --wildcards "*/resources/prosody-plugins" --strip-components=3 ;\
+    curl -x http://192.168.1.4:3128 --cacert /ca.crt -L --output - https://github.com/jitsi/jitsi-meet/archive/stable/jitsi-meet_${JITSI_VERSION_GITHUB}.tar.gz | tar zxf - --wildcards "*/resources/prosody-plugins" --strip-components=3 ;\
     mkdir /etc/prosody/conf.d ; \
     ln -s /var/lib/prosody/auth.meet.jitsi.crt /etc/prosody/certs/auth.meet.jitsi.crt ; \
     ln -s /var/lib/prosody/auth.meet.jitsi.key /etc/prosody/certs/auth.meet.jitsi.key ; \
