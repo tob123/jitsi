@@ -28,7 +28,7 @@ CONTAINER=CONTAINER_${i}
   touch ${!CONTAINER}.push
 done
 #if [[ -f ${CONTAINER_6}.scan ]]; then
-  CONT_IMAGE="${BUILD_REGISTRY}/${PROJECT}/${CONTAINER_6}:${COTURN_VERSION}"
+  CONT_IMAGE="${BUILD_REGISTRY}/${PROJECT}/${CONTAINER_6}:cicd"
   docker run --rm \
   -v "${TRIVY_CACHE_VOLUME}:/root/.cache/trivy" \
   "$TRIVY_IMAGE" image \
