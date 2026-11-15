@@ -1,12 +1,30 @@
 #!/bin/bash
-TRIVY_VOLUME=trivy-cache
-TRIVY_VERSION=0.76.0
+set -eo pipefail
+TRIVY_VERSION="0.76.0"
+TRIVY_IMAGE="${REGISTRY}"/aquasec/trivy:${TRIVY_VERSION}
+IGNORE_FILE=".trivyignore"
+TRIVY_CACHE_VOLUME=trivy-cache
+
+
+docker run --rm \
+  -v "${TRIVY_CACHE_VOLUME}:/root/.cache/trivy" \
+  ${TRIVY_JAVA_DB_REPOSITORY:+-e TRIVY_JAVA_DB_REPOSITORY="$TRIVY_JAVA_DB_REPOSITORY"} \
+  "$TRIVY_IMAGE" image --download-java-db-only
+
 set -x
 for i in 2 3 4 5; do
 CONTAINER=CONTAINER_${i}
 #if [[ -f ${!CONTAINER}.scan ]]; then
   CONT_IMAGE="${BUILD_REGISTRY}/${PROJECT}/${!CONTAINER}:cicd"
-  docker run -v "${TRIVY_VOLUME}":/root/.cache/ -v $(pwd)/.trivyignore:/work/.trivyignore -w /work "${REGISTRY}"/aquasec/trivy:${TRIVY_VERSION} image --exit-code 1 -s "MEDIUM,HIGH,CRITICAL" --ignore-unfixed --pkg-types library,os --db-repository coreg.appelo.org/ghcr/aquasecurity/trivy-db ${CONT_IMAGE} || exit 1
+  docker run --rm \
+  -v "${TRIVY_CACHE_VOLUME}:/root/.cache/trivy" \
+  "$TRIVY_IMAGE" image \
+  --exit-code 1 --ignore-unfixed \
+  --pkg-types library,os \
+  --image-src remote --server "$TRIVY_SERVICE" \
+  --severity "MEDIUM,HIGH,CRITICAL" \
+  --ignorefile /dev/stdin \
+  "$CONT_IMAGE" < "$IGNORE_FILE"
   touch ${!CONTAINER}.push
 done
 ##if [[ -f ${CONTAINER_6}.scan ]]; then
