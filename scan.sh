@@ -1,9 +1,11 @@
 #!/bin/bash
+TRIVY_VOLUME=trivy-cache
+TRIVY_VERSION=0.76.0
 set -x
 for i in 2 3 4 5; do
 CONTAINER=CONTAINER_${i}
 #if [[ -f ${!CONTAINER}.scan ]]; then
-  CONT_IMAGE="${BUILD_REGISTRY}/${PROJECT}/${!CONTAINER}:${JITSI_VERSION}"
+  CONT_IMAGE="${BUILD_REGISTRY}/${PROJECT}/${!CONTAINER}:cicd"
   docker run -v "${TRIVY_VOLUME}":/root/.cache/ -v $(pwd)/.trivyignore:/work/.trivyignore -w /work "${REGISTRY}"/aquasec/trivy:${TRIVY_VERSION} image --exit-code 1 -s "MEDIUM,HIGH,CRITICAL" --ignore-unfixed --pkg-types library,os --db-repository coreg.appelo.org/ghcr/aquasecurity/trivy-db ${CONT_IMAGE} || exit 1
   touch ${!CONTAINER}.push
 done
