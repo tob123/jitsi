@@ -37,7 +37,7 @@ if [[ $DISABLE_XMPP_WEBSOCKET -eq 0 ]]; then
   "smacks";
 EOF
 fi
-if [[ $ENABLE_TURN -eq 1 ]]; then
+if [[ $ENABLE_TURN -eq 1 || $ENABLE_STUN_PRIVATE -eq 1 ]]; then
   cat <<EOF
       "external_services";
 EOF

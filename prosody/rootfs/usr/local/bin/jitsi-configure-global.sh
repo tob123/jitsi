@@ -17,6 +17,13 @@ external_services = {
 };
 EOF
 fi
+if [[ $ENABLE_STUN_PRIVATE -eq 1 ]]; then
+cat <<EOF
+external_services = {
+  { type = "stun", host = "${TURN_DOMAIN}", port = 3478 },
+};
+EOF
+fi
 cat <<EOF
 log = {
 	{ levels = {min = "${PROSODY_LOG_LEVEL}"}, to = "console"};
